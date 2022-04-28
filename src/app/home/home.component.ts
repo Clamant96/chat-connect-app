@@ -22,10 +22,16 @@ export class HomeComponent implements OnInit {
   username = environment.username;
   avatar = environment.img;
   id = environment.id;
+  imgConversaUsuario: string = "";
 
   statusMensagem: string = "";
   nomeChat: string = "";
   contador: number = 0;
+  apresentaNome: boolean = false;
+  //ultimaMensagem: string = "";
+
+  key = 'data';
+  reverse = true;
 
   constructor(
     private chatService: ChatService,
@@ -78,11 +84,13 @@ export class HomeComponent implements OnInit {
   }
 
   ajustaNomeChat(chat: Chat) {
+    this.contador = 0;
 
     chat.usuarios.map(item => {
       if(item.id != this.id && this.contador == 0) {
         this.usuarioService.findByIdUsuario(item.id).subscribe((resp: Usuario) => {
           this.nomeChat =  resp.username;
+          this.imgConversaUsuario = resp.img;
 
         });
 
@@ -96,13 +104,35 @@ export class HomeComponent implements OnInit {
   }
 
   validaTipoDeChat(chat: Chat) {
+    this.nomeChat = "";
+
     if(chat.tipo == "chat") {
       this.nomeChat = this.ajustaNomeChat(chat);
+      console.log();
+      this.apresentaNome = this.apresentaNomeUsuario(chat.tipo);
+
+      //this.ultimaMensagem = chat.conversas[chat.conversas.length - 1].conteudo;
 
     }else {
       this.nomeChat = chat.nome;
 
     }
+
+  }
+
+  apresentaNomeUsuario(tipo: string) {
+
+    var retorno = false;
+
+    if(tipo != "chat") {
+      retorno = true;
+
+    }else {
+      retorno = false;
+
+    }
+
+    return retorno;
   }
 
   adicionarItemLista() {

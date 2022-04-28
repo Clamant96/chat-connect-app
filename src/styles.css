@@ -26,9 +26,9 @@ html, body {
 
 }
 
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
   display: none;
-}
+}*/
 
 /* CLASSES GLOBAIS INICIO */
 .fs-54 {
@@ -108,10 +108,16 @@ hr {
     --text-white: #f1f1f1;
     --text-white-light: #ffffff;
     --text-link: #191919;
+    --text-white-hora: #c8c6c6;
+    --text-nova-mensagem: #868A7E;
+
+    --color-scrollbar: #3B4247;
 
     --border-style-search: #e8e8e8;
+    --border-section-home: #2F3B43;
+    --border-section-home2: #242b2f;
 
-    --background-default: #111b21;
+    --background-default: #0A1014;
     --background-color-button: #3bc;
     --background-color-button-hover: rgb(43, 161, 177);
     --background-color-copyright: #191919;
@@ -122,6 +128,12 @@ hr {
     --background-tarja: #000000;
     --background-mesagem-usuario: rgba(2,78,65,0.7);
     --background-mesagem-resposta: #343f46;
+    --background-header-usuario-home: #202C33;
+    --background-foot-nova-mensagem: #202C33;
+    --background-foot-input-nova-mensagem: #2A3942;
+    --background-header-h1: #202C33;
+    --background-add-grupo: #141f27;
+    --background-conversar: #2A3942;
 
     --button-ok: #b4b4b4;
 

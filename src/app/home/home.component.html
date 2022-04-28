@@ -1,48 +1,70 @@
-<section class="container-section">
-  <nav class="menu-responsivo" >
-    <ul>
-      <div class="perfil">
-        <img src="{{avatar}}" alt="{{username}}">
-        <p class="username">
-          {{username}}
-        </p>
-      </div>
-      <div class="nova-categoria">
-        <input type="text" name="categoria" id="categoria" placeholder="Nova categoria" />
-        <button type="submit" >Adicionar</button>
-      </div>
-      <hr />
-      <a routerLink="/home" *ngFor='let item of chatArray' >
-        <img src="{{item.img}}" alt="{{item.nome}}" (click)='findByIdChat(item)'>
-        <p class="texto" (click)='findByIdChat(item)' >{{item.nome}}</p>
-      </a>
-    </ul>
-  </nav>
-  <div class="lista-categoria">
-    <h1>
-      {{nomeChat}}
-    </h1>
-    <ul>
-      <a *ngFor='let item of chat.conversas' >
-        <div class="{{ajustaMensagem(item.usuario.id, id)}}">
-          <div class="icone">
-            <img src="{{item.usuario.img}}" alt="{{item.usuario.username}}">
+<section class="section">
+  <div class="container-section">
+    <nav class="menu-responsivo" >
+      <ul>
+        <div class="perfil">
+          <div class="img">
+            <img src="{{avatar}}" alt="{{username}}">
           </div>
-          <div class="mesagem">
-            <p class="nome-usuario">
-              {{item.usuario.username}}
-            </p>
-            <p class="conteudo-conversa">
-              {{item.conteudo}}
-            </p>
-          </div>
+          <p class="username">
+            {{username}}
+          </p>
         </div>
-      </a>
-      <div class="novo-item-lista" >
-        <input [(ngModel)]='conversa.conteudo' type="text" name="lista" id="lista" placeholder="Novo item" />
-        <button type="submit" (click)='adicionarItemLista()' >Adicionar item</button>
+        <div class="novo-grupo">
+          <input type="text" name="categoria" id="categoria" placeholder="Criar grupo" />
+          <button type="submit" >Adicionar</button>
+        </div>
+        <div class="cria-scrolling-chat" *ngFor='let item of chatArray' >
+          <a routerLink="/home" (click)='findByIdChat(item)' >
+            <img src="{{item.img}}" alt="{{item.nome}}"  />
+            <p class="texto" >
+              {{item.nome}}
+            </p>
+            <!--<p class="texto" (click)='findByIdChat(item)' >
+              {{ultimaMensagem}}
+            </p>-->
+          </a>
+        </div>
+      </ul>
+    </nav>
+    <div class="lista-categoria">
+      <div class="background-imagem-chat">
+        <h1>
+          <div class="img">
+            <img src="{{imgConversaUsuario}}" alt="{{nomeChat}}">
+          </div>
+          {{nomeChat}}
+        </h1>
+        <ul>
+          <div class="cria-scrolling-chat">
+            <a *ngFor='let item of chat.conversas' >
+              <div class="{{ajustaMensagem(item.usuario.id, id)}}">
+                <div class="icone">
+                  <img src="{{item.usuario.img}}" alt="{{item.usuario.username}}">
+                </div>
+                <div class="mesagem">
+                  <p *ngIf="apresentaNome" class="nome-usuario">
+                    {{item.usuario.username}}
+                  </p>
+                  <p class="conteudo-conversa">
+                    {{item.conteudo}}
+                  </p>
+                  <div class="data-conversa">
+                    <p class="data-conversa-p">
+                      {{item.data | date: 'HH:mm'}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="novo-item-lista" >
+            <input [(ngModel)]='conversa.conteudo' type="text" name="lista" id="lista" placeholder="Mensagem" />
+            <button type="submit" (click)='adicionarItemLista()' >Enviar</button>
+          </div>
+        </ul>
       </div>
-    </ul>
+    </div>
   </div>
 </section>
 
