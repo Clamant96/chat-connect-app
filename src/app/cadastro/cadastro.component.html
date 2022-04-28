@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-6 img-bg">
+
+      </div>
+
+      <div class="col-md-6 mt-5 mb-5 ajuste-760px">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 ajuste-formulario">
+                <h1 class="text-center">Cadastro</h1>
+                <div class="form-group">
+                    <label for="usuario">Usuário</label>
+                    <!-- [(ngModel)] ==> AMAZENA OS DADOS INSERIDOS PELO USUARIO DENTRO DA MODEL -->
+                    <input [(ngModel)]='usuario.username' class="form-control" type="text" name="usuario" id="usuario" placeholder="Usuário">
+                </div>
+                <div class="form-group">
+                    <label for="foto">Link da foto</label>
+                    <!-- [(ngModel)] ==> AMAZENA OS DADOS INSERIDOS PELO USUARIO DENTRO DA MODEL -->
+                    <input [(ngModel)]='usuario.img' class="form-control" type="text" name="foto" id="foto" placeholder="Link de seu perfil">
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <!-- (input) ==> CHAMA UM METODO PARA CONFIRMAR A SENHA, QUE POR SUA VEZ RECEBEU UM VALOR DE confirmeSenha PARA QUE OS DOIS FVALORES POSSAM SER COMPARADOS E VALIDADOS -->
+                    <input (input)='confirmeSenha($event)' class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
+                </div>
+                <div class="form-group">
+                    <label for="confirmeSenha">Confirmar Senha</label>
+                    <!-- [(ngModel)] ==> AMAZENA OS DADOS INSERIDOS PELO USUARIO DENTRO DA MODEL -->
+                    <input [(ngModel)]='usuario.password' class="form-control" type="password" name="confirmeSenha" id="confirmeSenha" placeholder="Confirme sua Senha">
+                </div>
+                <div class="d-flex justify-content-end my-3">
+                    <button type="submit" class="botao mx-2" routerLink="/login">Cancelar</button>
+                    <!-- (click) ==> CHAMA UM METODO PARA REALIZAR O CADASTRO DENTRO DA APLICACAO, VALIDANDO OS DADOS INSERIDOS -->
+                    <button (mouseover)='botaoCadastrarAnimacaoOver()' (mouseout)='botaoCadastrarAnimacaoOut()' type="submit" class="botao" id="botaoCadastrar" (click)='cadastrar()'>Cadastrar</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+  </div>
+</div>

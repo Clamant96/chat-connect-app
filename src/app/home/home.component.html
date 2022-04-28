@@ -1,0 +1,87 @@
+<section class="container-section">
+  <nav class="menu-responsivo" >
+    <ul>
+      <div class="perfil">
+        <img src="{{avatar}}" alt="{{username}}">
+        <p class="username">
+          {{username}}
+        </p>
+      </div>
+      <div class="nova-categoria">
+        <input type="text" name="categoria" id="categoria" placeholder="Nova categoria" />
+        <button type="submit" >Adicionar</button>
+      </div>
+      <hr />
+      <a routerLink="/home" *ngFor='let item of chatArray' >
+        <img src="{{item.img}}" alt="{{item.nome}}" (click)='findByIdChat(item)'>
+        <p class="texto" (click)='findByIdChat(item)' >{{item.nome}}</p>
+      </a>
+    </ul>
+  </nav>
+  <div class="lista-categoria">
+    <h1>
+      {{nomeChat}}
+    </h1>
+    <ul>
+      <a *ngFor='let item of chat.conversas' >
+        <div class="{{ajustaMensagem(item.usuario.id, id)}}">
+          <div class="icone">
+            <img src="{{item.usuario.img}}" alt="{{item.usuario.username}}">
+          </div>
+          <div class="mesagem">
+            <p class="nome-usuario">
+              {{item.usuario.username}}
+            </p>
+            <p class="conteudo-conversa">
+              {{item.conteudo}}
+            </p>
+          </div>
+        </div>
+      </a>
+      <div class="novo-item-lista" >
+        <input [(ngModel)]='conversa.conteudo' type="text" name="lista" id="lista" placeholder="Novo item" />
+        <button type="submit" (click)='adicionarItemLista()' >Adicionar item</button>
+      </div>
+    </ul>
+  </div>
+</section>
+
+<!-- MODAL DE LISTA / PUT -->
+<!-- <div class="modal fade" id="putLista" tabindex="-1" role="dialog" aria-labelledby="modalPutLista" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title texto-bold" id="texto">Atualizar lista</h2>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <input [(ngModel)]='carregaListaParaEdicao.texto' type="text" name="texto" class="modal-input" id="texto" placeholder="Texto">
+        </div>
+        <div class="modal-footer">
+            <button type="button" (click)='atualizaLista()' data-bs-dismiss="modal" aria-label="Close" >Atualizar</button>
+        </div>
+      </div>
+  </div>
+</div> -->
+
+<!-- MODAL DE CATEGORIA / PUT -->
+<!-- <div class="modal fade" id="putCategoria" tabindex="-1" role="dialog" aria-labelledby="modalPutCategoria" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title texto-bold" id="categoria">Atualizar categoria</h2>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <input [(ngModel)]='carregaCategoriaParaEdicao.nome' type="text" name="texto" class="modal-input" id="texto" placeholder="Texto">
+        </div>
+        <div class="modal-footer">
+            <button type="button" (click)='atualizaCategoria()' data-bs-dismiss="modal" aria-label="Close" >Atualizar</button>
+        </div>
+      </div>
+  </div>
+</div> -->

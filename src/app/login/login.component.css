@@ -1,0 +1,82 @@
+.img-bg {
+  background-image: url(https://i.imgur.com/iuaLq7p.jpg);
+
+  min-height: 100vh;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.botao {
+  margin-top: 5%;
+  padding: 2% 8%;
+
+  background-color: var(--background-color-button);
+
+  border: none;
+  border-radius: 5px;
+
+  color: var(--text-white);
+
+  font-weight: 600;
+
+  transition: background-color, color, .3s ease;
+
+  font-family: 'Amaranth', sans-serif;
+
+}
+
+.botao:hover {
+  background-color: var(--background-color-button-hover);
+
+  color: var(--text-white-light);
+
+}
+
+label {
+  font-weight: 600;
+  font-family: 'Amaranth', sans-serif;
+
+}
+
+input, option, select, .link {
+  font-weight: 100;
+  font-family: 'Amaranth', sans-serif;
+
+  color: var(--text-input);
+
+}
+
+a {
+  text-decoration: none;
+
+  font-weight: 700;
+
+  color: var(--text-link);
+
+  transition: color, .3s ease;
+
+}
+
+a:hover {
+  color: var(--background-color-button);
+
+}
+
+@media(max-width: 760px){
+  .img-bg {
+      display: none;
+
+  }
+
+  .container-fluid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 100vh;
+
+  }
+
+}
