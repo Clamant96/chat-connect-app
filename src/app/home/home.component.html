@@ -11,12 +11,12 @@
           </p>
         </div>
         <div class="novo-grupo">
-          <input type="text" name="categoria" id="categoria" placeholder="Criar grupo" />
-          <button type="submit" >Adicionar</button>
+          <input [(ngModel)]='novoChat.nome' type="text" name="novoChat" id="novoChat" placeholder="Nova conversa" (change)='apresentaUsuarios(novoChat.nome)' />
+          <!--<button type="submit"  >Adicionar</button>-->
         </div>
         <div class="cria-scrolling-chat" *ngFor='let item of chatArray' >
           <a routerLink="/home" (click)='findByIdChat(item)' >
-            <img src="{{item.img}}" alt="{{item.nome}}"  />
+            <img src="{{item.img}}" alt="{{item.nome}}" />
             <p class="texto" >
               {{item.nome}}
             </p>
@@ -37,6 +37,20 @@
         </h1>
         <ul>
           <div class="cria-scrolling-chat">
+
+            <div class="{{addUsuarioChatClass}}">
+              <a *ngFor='let item of listDeUsuario' (click)='criarRelacaoDeUsuarios(item)' >
+                <div class="icone">
+                  <img src="{{item.img}}" alt="{{item.username}}">
+                </div>
+                <div class="mesagem">
+                  <p class="nome-usuario">
+                    {{item.username}}
+                  </p>
+                </div>
+              </a>
+            </div>
+
             <a *ngFor='let item of chat.conversas' >
               <div class="{{ajustaMensagem(item.usuario.id, id)}}">
                 <div class="icone">

@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment.prod';
 export class HomeComponent implements OnInit {
 
   chat: Chat = new Chat();
+  novoChat: Chat = new Chat();
   chatMemoria: Chat = new Chat();
   chatArray: Chat[];
 
@@ -23,7 +24,10 @@ export class HomeComponent implements OnInit {
   conversaMemoria: Conversa = new Conversa();
 
   chatConversa: Chat = new Chat();
+
   usuarioConversa: Usuario = new Usuario();
+  listDeUsuario: Usuario[];
+  listDeUsuarioParaNovaConversa: Usuario[];
 
   username = environment.username;
   avatar = environment.img;
@@ -35,6 +39,7 @@ export class HomeComponent implements OnInit {
   contador: number = 0;
   apresentaNome: boolean = false;
   memoriaIdChat: number = 0;
+  addUsuarioChatClass: string = "";
   //ultimaMensagem: string = "";
 
   key = 'data';
@@ -65,11 +70,33 @@ export class HomeComponent implements OnInit {
     this.chatService.findAllChatsByIdUsuario(id).subscribe((resp: Chat[]) => {
       this.chatArray = resp;
 
+      this.chatArray.map(item => {
+
+        if(item.tipo == "chat") {
+
+          item.usuarios.map(i => {
+
+            if(i.id != id) {
+
+              this.usuarioService.findByIdUsuario(i.id).subscribe((resp: Usuario) => {
+                item.nome = resp.username;
+
+              });
+
+            }
+
+          });
+
+        }
+
+      });
+
     });
 
   }
 
   findByIdChat(chat: Chat) {
+    this.listDeUsuario = [];
     this.chatMemoria = chat;
 
     this.chatService.findByIdChat(chat.id).subscribe((resp: Chat) => {
@@ -79,6 +106,14 @@ export class HomeComponent implements OnInit {
     });
 
     this.validaTipoDeChat(chat);
+
+  }
+
+  findAllusuarios() {
+    this.usuarioService.findAllUsuarios().subscribe((resp: Usuario[]) => {
+      this.listDeUsuario = resp;
+
+    });
 
   }
 
@@ -180,6 +215,33 @@ export class HomeComponent implements OnInit {
 
     });
 
+  }
+
+  apresentaUsuarios(nomeChat: string) {
+    this.chat = new Chat();
+
+    if(nomeChat.length > 0) {
+      this.findAllusuarios();
+
+      this.addUsuarioChatClass = "add-usuario-chat";
+
+    }else {
+      this.listDeUsuario = [];
+
+      this.addUsuarioChatClass = "";
+
+    }
+
+  }
+
+  criarNovaConversa() {
+
+  }
+
+  criarRelacaoDeUsuarios(usuario: Usuario) {
+    console.log(usuario);
+
+    // this.listDeUsuarioParaNovaConversa.push(usuario);
   }
 
 }

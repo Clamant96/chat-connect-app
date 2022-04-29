@@ -30,6 +30,11 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.serverPort}/usuarios/${id}`, this.autorizacao);
   }
 
+  findAllUsuarios(): Observable<Usuario[]> {
+
+    return this.http.get<Usuario[]>(`${this.serverPort}/usuarios`, this.autorizacao);
+  }
+
   login(usuarioLogin: UsuarioLogin): Observable<UsuarioLogin> {
 
     return this.http.post<UsuarioLogin>(`${this.serverPort}/usuarios/logar`, usuarioLogin);

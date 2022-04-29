@@ -199,7 +199,7 @@
 .section .container-section nav ul .novo-grupo input {
   padding: 1% 2%;
 
-  width: 75%;
+  width: 96%;
   height: auto;
 
   border: none;
@@ -372,6 +372,38 @@
 
 .section .container-section .lista-categoria ul .cria-scrolling-chat::-webkit-scrollbar-thumb {
   background: var(--color-scrollbar);
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat {
+  overflow-y: scroll;
+
+  width: 100%;
+  height: 75vh;
+
+  background-color: var(--background-add-grupo);
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat a {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  background-color: var(--background-foot-input-nova-mensagem);
 
 }
 
