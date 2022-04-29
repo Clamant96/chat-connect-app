@@ -1,3 +1,4 @@
+import { ConversaService } from './../service/conversa.service';
 import { Usuario } from './../model/Usuario';
 import { UsuarioService } from './../service/usuario.service';
 import { Conversa } from './../model/Conversa';
@@ -15,9 +16,14 @@ import { environment } from 'src/environments/environment.prod';
 export class HomeComponent implements OnInit {
 
   chat: Chat = new Chat();
+  chatMemoria: Chat = new Chat();
   chatArray: Chat[];
 
   conversa: Conversa = new Conversa();
+  conversaMemoria: Conversa = new Conversa();
+
+  chatConversa: Chat = new Chat();
+  usuarioConversa: Usuario = new Usuario();
 
   username = environment.username;
   avatar = environment.img;
@@ -28,6 +34,7 @@ export class HomeComponent implements OnInit {
   nomeChat: string = "";
   contador: number = 0;
   apresentaNome: boolean = false;
+  memoriaIdChat: number = 0;
   //ultimaMensagem: string = "";
 
   key = 'data';
@@ -36,6 +43,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private chatService: ChatService,
     private usuarioService: UsuarioService,
+    private conversaService: ConversaService,
     private router: Router
 
   ) { }
@@ -62,10 +70,12 @@ export class HomeComponent implements OnInit {
   }
 
   findByIdChat(chat: Chat) {
+    this.chatMemoria = chat;
 
     this.chatService.findByIdChat(chat.id).subscribe((resp: Chat) => {
       this.chat = resp;
-
+      console.log("CHAT DO FINDBYIDCHAT");
+      console.log(this.chat);
     });
 
     this.validaTipoDeChat(chat);
@@ -118,6 +128,8 @@ export class HomeComponent implements OnInit {
 
     }
 
+    this.memoriaIdChat = chat.id;
+
   }
 
   apresentaNomeUsuario(tipo: string) {
@@ -135,7 +147,38 @@ export class HomeComponent implements OnInit {
     return retorno;
   }
 
-  adicionarItemLista() {
+  adicionarItemLista(idUsuario: number, idChat: number) {
+
+    this.usuarioConversa.id = idUsuario;
+    this.chatConversa.id = idChat;
+
+    this.conversa.usuario = this.usuarioConversa;
+    this.conversa.chat = this.chatConversa;
+
+    console.log(this.conversa);
+
+    this.conversaMemoria.conteudo = this.conversa.conteudo;
+    this.conversaMemoria.data = new Date();
+
+    this.conversaService.postConversa(this.conversa).subscribe((resp: Conversa) => {
+      console.log('Conversa enviada com sucesso.');
+
+      this.usuarioService.findByIdUsuario(idUsuario).subscribe((resp: Usuario) => {
+        this.conversaMemoria.usuario = resp;
+      });
+
+      this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
+        this.conversaMemoria.chat = resp;
+      });
+
+      this.chat.conversas.push(this.conversaMemoria);
+
+      this.conversa = new Conversa();
+
+    }, e => {
+      console.log('Ocorreu um erro no envio da conversa.');
+
+    });
 
   }
 
