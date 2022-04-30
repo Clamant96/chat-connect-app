@@ -70,7 +70,7 @@ export class UsuarioService {
 
   chatOuGrupo(idUsuario: number, idChat: number): Observable<Usuario> {
 
-    return this.http.post<Usuario>(`${this.serverPort}/usuarios/usuario_chats/conversa/${idUsuario}/${idChat}`, null, this.autorizacao)
+    return this.http.get<Usuario>(`${this.serverPort}/usuarios/usuario_chats/conversa/${idUsuario}/${idChat}`, this.autorizacao)
   }
 
 }

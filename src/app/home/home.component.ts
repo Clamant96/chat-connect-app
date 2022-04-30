@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   apresentaNome: boolean = false;
   memoriaIdChat: number = 0;
   addUsuarioChatClass: string = "";
+  apresentaUsuario: string = "";
   //ultimaMensagem: string = "";
 
   key = 'data';
@@ -81,7 +82,7 @@ export class HomeComponent implements OnInit {
 
               this.usuarioService.findByIdUsuario(i.id).subscribe((resp: Usuario) => {
                 item.nome = resp.username;
-
+                item.img = resp.img;
               });
 
             }
@@ -107,6 +108,13 @@ export class HomeComponent implements OnInit {
     });
 
     this.validaTipoDeChat(chat);
+
+    /*setInterval(() => {
+      this.chatService.findByIdChat(chat.id).subscribe((resp: Chat) => {
+        this.chat = resp;
+      });
+
+    }, 10);*/
 
   }
 
@@ -223,6 +231,10 @@ export class HomeComponent implements OnInit {
 
     });
 
+    this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
+      this.chat = resp;
+    });
+
   }
 
   apresentaUsuarios(nomeChat: string) {
@@ -243,6 +255,7 @@ export class HomeComponent implements OnInit {
   }
 
   gerenciaChat(usuario: Usuario) {
+
     this.usuarioService.chatOuGrupo(this.id, usuario.id).subscribe((resp: Usuario) => {
       console.log("Chat criado com sucesso.");
 
@@ -252,6 +265,87 @@ export class HomeComponent implements OnInit {
       console.log("Ocorreu um problema com a criacao do chat.");
 
     });
+
+  }
+
+  abrirNovoChat(usuario: Usuario) {
+
+    this.novoChat.nome = usuario.username;
+    this.novoChat.img = usuario.img;
+    this.novoChat.tipo = "chat";
+
+    console.log("Chat antes: ");
+    console.log(this.novoChat);
+
+    // criar o chat
+    this.chatService.postChat(this.novoChat).subscribe((resp: Chat) => {
+      console.log("resp chat:");
+      console.log(resp);
+
+      // ADICIONA O PRIMEIRO USUARIO
+      this.usuarioService.chatOuGrupo(this.id, resp.id).subscribe((resp: Usuario) => {
+
+      });
+
+      // ADICIONA O SEGUNDO USUARIO
+      this.usuarioService.chatOuGrupo(usuario.id, resp.id).subscribe((resp: Usuario) => {
+
+        setTimeout(() => {
+          this.findAllChatsbyIdUsuario(this.id);
+
+          this.apresentaUsuario = "";
+          this.listDeUsuario = [];
+
+        }, 1);
+
+      });
+
+    });
+
+    console.log("Chat depois: ");
+    console.log(this.novoChat);
+
+    // vincular o chat aos usuarios
+    /*this.usuarioService.chatOuGrupo(this.id, usuario.id).subscribe((resp: Usuario) => {
+
+      this.findAllChatsbyIdUsuario(this.id);
+
+    }, erro => {
+      console.log("Ocorreu um problema com a criacao do chat.");
+
+    });*/
+
+  }
+
+  apresentaUsuarioParaChat() {
+
+    var comprimentoLista: number = 0;
+
+    try {
+      this.listDeUsuario.map(item => {
+        comprimentoLista++;
+
+      });
+
+    }catch(erro) {
+      comprimentoLista = 0;
+
+    }
+
+    setTimeout(() => {
+      if(comprimentoLista == 0) {
+        this.findAllUsuariosConversa();
+
+        this.apresentaUsuario = "add-usuario-chat";
+
+      }else {
+        this.listDeUsuario = [];
+
+        this.apresentaUsuario = "";
+
+      }
+
+    }, 0.500);
 
   }
 

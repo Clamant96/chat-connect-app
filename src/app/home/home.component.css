@@ -199,7 +199,7 @@
 .section .container-section nav ul .novo-grupo input {
   padding: 1% 2%;
 
-  width: 96%;
+  width: 87%;
   height: auto;
 
   border: none;
@@ -220,7 +220,7 @@
 .section .container-section nav ul .novo-grupo button {
   padding: 1% 2%;
 
-  width: 20%;
+  width: 10%;
   height: auto;
 
   border: none;
@@ -237,6 +237,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+}
+
+.section .container-section nav ul .novo-grupo button svg {
+  width: 100%;
+  height: auto;
+
+  color: var(--text-white-hora);
 
 }
 
@@ -385,6 +393,16 @@
 
 }
 
+.section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+
+}
+
 .section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat a {
   width: 100%;
   height: auto;
@@ -394,16 +412,6 @@
   justify-content: flex-start;
 
   background-color: var(--background-foot-input-nova-mensagem);
-
-}
-
-.section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat a::-webkit-scrollbar {
-  width: 5px;
-
-}
-
-.section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat a::-webkit-scrollbar-thumb {
-  background: var(--color-scrollbar);
 
 }
 

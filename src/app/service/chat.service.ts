@@ -32,4 +32,9 @@ export class ChatService {
     return this.http.get<Chat>(`${this.serverPort}/chats/${id}`, this.autorizacao);
   }
 
+  postChat(chat: Chat): Observable<Chat> {
+
+    return this.http.post<Chat>(`${this.serverPort}/chats`, chat, this.autorizacao);
+  }
+
 }
