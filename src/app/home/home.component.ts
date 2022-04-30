@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { Chat } from './../model/Chat';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
-import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-home',
