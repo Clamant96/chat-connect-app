@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Chat } from './../model/Chat';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   usuarioConversa: Usuario = new Usuario();
   listDeUsuario: Usuario[];
-  listDeUsuarioParaNovaConversa: Usuario[];
+  idsUsuariosChat: string = "";
 
   username = environment.username;
   avatar = environment.img;
@@ -113,6 +114,13 @@ export class HomeComponent implements OnInit {
     this.usuarioService.findAllUsuarios().subscribe((resp: Usuario[]) => {
       this.listDeUsuario = resp;
 
+    });
+
+  }
+
+  findAllUsuariosConversa() {
+    this.usuarioService.findAllUsuariosConversa(this.id).subscribe((resp: Usuario[]) => {
+      this.listDeUsuario = resp;
     });
 
   }
@@ -221,7 +229,7 @@ export class HomeComponent implements OnInit {
     this.chat = new Chat();
 
     if(nomeChat.length > 0) {
-      this.findAllusuarios();
+      this.findAllUsuariosConversa();
 
       this.addUsuarioChatClass = "add-usuario-chat";
 
@@ -234,14 +242,17 @@ export class HomeComponent implements OnInit {
 
   }
 
-  criarNovaConversa() {
+  gerenciaChat(usuario: Usuario) {
+    this.usuarioService.chatOuGrupo(this.id, usuario.id).subscribe((resp: Usuario) => {
+      console.log("Chat criado com sucesso.");
 
-  }
+      this.findAllChatsbyIdUsuario(this.id);
 
-  criarRelacaoDeUsuarios(usuario: Usuario) {
-    console.log(usuario);
+    }, erro => {
+      console.log("Ocorreu um problema com a criacao do chat.");
 
-    // this.listDeUsuarioParaNovaConversa.push(usuario);
+    });
+
   }
 
 }

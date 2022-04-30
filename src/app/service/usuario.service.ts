@@ -35,6 +35,11 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(`${this.serverPort}/usuarios`, this.autorizacao);
   }
 
+  findAllUsuariosConversa(id: number): Observable<Usuario[]> {
+
+    return this.http.get<Usuario[]>(`${this.serverPort}/usuarios/usuarios-conversa/${id}`, this.autorizacao);
+  }
+
   login(usuarioLogin: UsuarioLogin): Observable<UsuarioLogin> {
 
     return this.http.post<UsuarioLogin>(`${this.serverPort}/usuarios/logar`, usuarioLogin);
@@ -61,6 +66,11 @@ export class UsuarioService {
 
     /* RETORNA O VALOR DA VARIAVEL */
     return ok;
+  }
+
+  chatOuGrupo(idUsuario: number, idChat: number): Observable<Usuario> {
+
+    return this.http.post<Usuario>(`${this.serverPort}/usuarios/usuario_chats/conversa/${idUsuario}/${idChat}`, null, this.autorizacao)
   }
 
 }

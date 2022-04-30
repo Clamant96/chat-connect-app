@@ -39,9 +39,9 @@
           <div class="cria-scrolling-chat">
 
             <div class="{{addUsuarioChatClass}}">
-              <a *ngFor='let item of listDeUsuario' (click)='criarRelacaoDeUsuarios(item)' >
+              <a *ngFor='let item of listDeUsuario' (click)='gerenciaChat(item)' >
                 <div class="icone">
-                  <img src="{{item.img}}" alt="{{item.username}}">
+                  <img src="{{item.img}}" alt="{{item.username}}" />
                 </div>
                 <div class="mesagem">
                   <p class="nome-usuario">
