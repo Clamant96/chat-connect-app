@@ -96,11 +96,14 @@ export class HomeComponent implements OnInit {
   onMessage(message: any): void {
     // this.items.push(message.body);
 
-    this.chatService.findByIdChat(this.idChatInputAtualizacao).subscribe((resp: Chat) => {
-      this.chat = resp;
-      console.log('RECEBENDO INPUT PARA ATUALIZAR CHAT');
-      console.log(resp);
-    });
+    if(this.idChatInputAtualizacao > 0) {
+      this.chatService.findByIdChat(this.idChatInputAtualizacao).subscribe((resp: Chat) => {
+        this.chat = resp;
+        console.log('RECEBENDO INPUT PARA ATUALIZAR CHAT');
+        console.log(resp);
+      });
+
+    }
 
   }
 
@@ -143,6 +146,8 @@ export class HomeComponent implements OnInit {
     this.chatMemoria = chat;
 
     this.idChatInputAtualizacao = chat.id;
+
+    this.apresentaUsuario = "";
 
     this.chatService.findByIdChat(chat.id).subscribe((resp: Chat) => {
       this.chat = resp;
@@ -243,45 +248,51 @@ export class HomeComponent implements OnInit {
 
   adicionarItemLista(idUsuario: number, idChat: number) {
 
-    this.usuarioConversa.id = idUsuario;
-    this.chatConversa.id = idChat;
+    try {
 
-    this.conversa.usuario = this.usuarioConversa;
-    this.conversa.chat = this.chatConversa;
+      this.usuarioConversa.id = idUsuario;
+      this.chatConversa.id = idChat;
 
-    console.log(this.conversa);
+      this.conversa.usuario = this.usuarioConversa;
+      this.conversa.chat = this.chatConversa;
 
-    this.conversaMemoria.conteudo = this.conversa.conteudo;
-    this.conversaMemoria.data = new Date();
+      console.log(this.conversa);
 
-    this.conversaService.postConversa(this.conversa).subscribe((resp: Conversa) => {
-      console.log('Conversa enviada com sucesso.');
+      this.conversaMemoria.conteudo = this.conversa.conteudo;
+      this.conversaMemoria.data = new Date();
 
-      this.usuarioService.findByIdUsuario(idUsuario).subscribe((resp: Usuario) => {
-        this.conversaMemoria.usuario = resp;
+      this.conversaService.postConversa(this.conversa).subscribe((resp: Conversa) => {
+        console.log('Conversa enviada com sucesso.');
+
+        this.usuarioService.findByIdUsuario(idUsuario).subscribe((resp: Usuario) => {
+          this.conversaMemoria.usuario = resp;
+        });
+
+        this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
+          this.conversaMemoria.chat = resp;
+        });
+
+        this.chat.conversas.push(this.conversaMemoria);
+
+        this.conversa = new Conversa();
+
+      }, e => {
+        console.log('Ocorreu um erro no envio da conversa.');
+
       });
 
       this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
-        this.conversaMemoria.chat = resp;
+        this.chat = resp;
       });
 
-      this.chat.conversas.push(this.conversaMemoria);
+      setTimeout(() => {
+        this.start();
 
-      this.conversa = new Conversa();
+      }, 1);
 
-    }, e => {
-      console.log('Ocorreu um erro no envio da conversa.');
-
-    });
-
-    this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
-      this.chat = resp;
-    });
-
-    setTimeout(() => {
-      this.start();
-
-    }, 1);
+    }catch(erro) {
+      console.log(erro);
+    }
 
   }
 
@@ -322,36 +333,78 @@ export class HomeComponent implements OnInit {
     this.novoChat.img = usuario.img;
     this.novoChat.tipo = "chat";
 
-    console.log("Chat antes: ");
-    console.log(this.novoChat);
+    let jaExisteEmMinhaLista: boolean = false;
+    let gravaChatReload: Chat = new Chat();
 
-    // criar o chat
-    this.chatService.postChat(this.novoChat).subscribe((resp: Chat) => {
-      console.log("resp chat:");
-      console.log(resp);
+    this.chatArray.map(item => {
+      item.usuarios.map(i => {
 
-      // ADICIONA O PRIMEIRO USUARIO
-      this.usuarioService.chatOuGrupo(this.id, resp.id).subscribe((resp: Usuario) => {
+        let valor: string = String(i.id);
 
-      });
+        if(valor.includes(String(usuario.id))) {
+          jaExisteEmMinhaLista = true;
+          gravaChatReload = item;
+        }
 
-      // ADICIONA O SEGUNDO USUARIO
-      this.usuarioService.chatOuGrupo(usuario.id, resp.id).subscribe((resp: Usuario) => {
-
-        setTimeout(() => {
-          this.findAllChatsbyIdUsuario(this.id);
-
-          this.apresentaUsuario = "";
-          this.listDeUsuario = [];
-
-        }, 1);
-
-      });
+      })
 
     });
 
-    console.log("Chat depois: ");
-    console.log(this.novoChat);
+    if(!jaExisteEmMinhaLista) {
+      // criar o chat
+      this.chatService.postChat(this.novoChat).subscribe((resp: Chat) => {
+        console.log("resp chat:");
+        console.log(resp);
+
+        gravaChatReload = resp;
+
+        console.log(gravaChatReload);
+
+        // ADICIONA O PRIMEIRO USUARIO
+        this.usuarioService.chatOuGrupo(this.id, resp.id).subscribe((resp: Usuario) => {
+
+        });
+
+        // ADICIONA O SEGUNDO USUARIO
+        this.usuarioService.chatOuGrupo(usuario.id, resp.id).subscribe((resp: Usuario) => {
+
+          setTimeout(() => {
+            this.findAllChatsbyIdUsuario(this.id);
+
+            this.apresentaUsuario = "";
+            this.listDeUsuario = [];
+
+            setTimeout(() => {
+              this.chatService.findByIdChat(gravaChatReload.id).subscribe((resp: Chat) => {
+                this.findByIdChat(resp);
+
+                this.novoChat = new Chat();
+
+              });
+
+            }, 2);
+
+          }, 1);
+
+        });
+
+      });
+
+      console.log("Chat depois: ");
+      console.log(this.novoChat);
+
+    }else {
+      this.findByIdChat(gravaChatReload);
+
+      this.apresentaUsuario = "add-usuario-chat";
+      this.addUsuarioChatClass = "remove-block";
+
+      this.apresentaUsuario = "";
+      this.listDeUsuario = [];
+
+      this.novoChat = new Chat();
+
+    }
 
     // vincular o chat aos usuarios
     /*this.usuarioService.chatOuGrupo(this.id, usuario.id).subscribe((resp: Usuario) => {
@@ -382,9 +435,15 @@ export class HomeComponent implements OnInit {
 
     setTimeout(() => {
       if(comprimentoLista == 0) {
+
+        this.nomeChat = "Lista de usuarios";
+        this.imgConversaUsuario = "../../assets/img/perfil.svg";
+
         this.findAllUsuariosConversa();
 
         this.apresentaUsuario = "add-usuario-chat";
+        this.addUsuarioChatClass = "remove-block";
+        this.chat = new Chat();
 
       }else {
         this.listDeUsuario = [];

@@ -393,6 +393,11 @@
 
 }
 
+.section .container-section .lista-categoria ul .cria-scrolling-chat .remove-block {
+  display: none;
+
+}
+
 .section .container-section .lista-categoria ul .cria-scrolling-chat .add-usuario-chat::-webkit-scrollbar {
   width: 5px;
 
