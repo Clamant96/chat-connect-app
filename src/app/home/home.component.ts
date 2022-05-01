@@ -1,3 +1,5 @@
+import { WebsocketService } from './../service/websocket.service';
+import { WebSocketConnector } from './../../websocket/websocket-connector';
 import { ConversaService } from './../service/conversa.service';
 import { Usuario } from './../model/Usuario';
 import { UsuarioService } from './../service/usuario.service';
@@ -7,6 +9,8 @@ import { Router } from '@angular/router';
 import { Chat } from './../model/Chat';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+/*import * as SockJS from 'sockjs-client';
+import * as Stomp from 'stompjs';*/
 
 @Component({
   selector: 'app-home',
@@ -43,13 +47,21 @@ export class HomeComponent implements OnInit {
   apresentaUsuario: string = "";
   //ultimaMensagem: string = "";
 
+  idChatInputAtualizacao: number = 0;
+
   key = 'data';
   reverse = true;
+
+  /* WebSocket - CONFIGURACAO */
+  items: any[] = [];
+  private webSocketConnector: WebSocketConnector;
+  private stompClient: any;
 
   constructor(
     private chatService: ChatService,
     private usuarioService: UsuarioService,
     private conversaService: ConversaService,
+    private websocketService: WebsocketService,
     private router: Router
 
   ) { }
@@ -62,9 +74,39 @@ export class HomeComponent implements OnInit {
 
     }
 
+    this.webSocketConnector = new WebSocketConnector(
+      `${environment.server+environment.port}/socket`,
+      '/statusProcessor',
+      this.onMessage.bind(this)
+    );
+
+    //this.start();
+
     this.findAllChatsbyIdUsuario(this.id);
 
   }
+
+  start() {
+    this.websocketService.inicializaObservador().subscribe(resp => {
+      console.log(resp);
+    });
+
+  }
+
+  onMessage(message: any): void {
+    // this.items.push(message.body);
+
+    this.chatService.findByIdChat(this.idChatInputAtualizacao).subscribe((resp: Chat) => {
+      this.chat = resp;
+      console.log('RECEBENDO INPUT PARA ATUALIZAR CHAT');
+      console.log(resp);
+    });
+
+  }
+
+  /*onMessage() {
+    this.items.push(this.conversa.conteudo);
+  }*/
 
   findAllChatsbyIdUsuario(id: number) {
 
@@ -99,6 +141,8 @@ export class HomeComponent implements OnInit {
   findByIdChat(chat: Chat) {
     this.listDeUsuario = [];
     this.chatMemoria = chat;
+
+    this.idChatInputAtualizacao = chat.id;
 
     this.chatService.findByIdChat(chat.id).subscribe((resp: Chat) => {
       this.chat = resp;
@@ -233,6 +277,11 @@ export class HomeComponent implements OnInit {
     this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
       this.chat = resp;
     });
+
+    setTimeout(() => {
+      this.start();
+
+    }, 1);
 
   }
 
