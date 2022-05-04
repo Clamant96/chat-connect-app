@@ -48,7 +48,7 @@
   overflow-y: scroll;
 
   width: 100%;
-  height: 100%;
+  height: 80.5vh;
 
 }
 
@@ -152,6 +152,8 @@
   justify-content: center;
 
   margin-left: 2.5%;
+
+  cursor: pointer;
 
 }
 
@@ -295,6 +297,8 @@
 }
 
 .section .container-section .lista-categoria .background-imagem-chat {
+  position: relative;
+
   width: 100%;
   height: 100%;
 
@@ -306,6 +310,31 @@
   background-image: url(../../assets/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d_opacidade_10.png);
   background-position: center;
   background-size: 45%;
+
+}
+
+.section .container-section .lista-categoria .background-imagem-chat .inicio-chat {
+  position: absolute;
+
+  width: 64.6vw;
+  height: 95vh;
+
+  background-color: var(--background-header-usuario-home);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.section .container-section .lista-categoria .background-imagem-chat .remove-inicio-chat {
+  display: none;
+
+}
+
+.section .container-section .lista-categoria .background-imagem-chat .inicio-chat img {
+  width: 50%;
+  height: 100%;
 
 }
 
@@ -328,6 +357,40 @@
   justify-content: flex-start;
 
   background-color: var(--background-header-h1);
+
+}
+
+.section .container-section .lista-categoria h1 .qtd-itens-lista-grupo {
+  display: none;
+
+}
+
+.section .container-section .lista-categoria h1 .ajuste-qtd {
+  margin-left: 10px !important;
+
+  font-size: 20px !important;
+  font-weight: 600;
+  font-family: 'Titillium Web', sans-serif !important;
+
+  color: var(--text-white);
+
+}
+
+.section .container-section .lista-categoria h1 .ajuste-botao {
+  margin-left: 10px !important;
+
+  font-size: 20px !important;
+  font-weight: 600;
+  font-family: 'Titillium Web', sans-serif !important;
+
+  color: var(--text-white);
+
+  border: none;
+  border-radius: 5px;
+
+  background-color: var(--background-mesagem-usuario);
+
+  padding: 1% 2%;
 
 }
 

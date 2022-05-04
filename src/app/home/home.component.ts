@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   chatMemoria: Chat = new Chat();
   chatArray: Chat[];
 
+  listaUsuariosGrupo: Usuario[] = [];
+
   conversa: Conversa = new Conversa();
   conversaMemoria: Conversa = new Conversa();
 
@@ -45,6 +47,8 @@ export class HomeComponent implements OnInit {
   memoriaIdChat: number = 0;
   addUsuarioChatClass: string = "";
   apresentaUsuario: string = "";
+  removeListaUsuariosGrupo: string = "qtd-itens-lista-grupo";
+  inicioChat: string = "inicio-chat";
   //ultimaMensagem: string = "";
 
   idChatInputAtualizacao: number = 0;
@@ -116,6 +120,9 @@ export class HomeComponent implements OnInit {
     this.chatService.findAllChatsByIdUsuario(id).subscribe((resp: Chat[]) => {
       this.chatArray = resp;
 
+      console.log('CHAT ARRAY: ');
+      console.log(this.chatArray);
+
       this.chatArray.map(item => {
 
         if(item.tipo == "chat") {
@@ -145,14 +152,24 @@ export class HomeComponent implements OnInit {
     this.listDeUsuario = [];
     this.chatMemoria = chat;
 
+    // REMOVE OS DADOS DO GRUPO CARREGADO PARA CADASTRO
+    this.novoChat = new Chat();
+    this.nomeChat = "";
+    this.addUsuarioChatClass = "";
+    this.removeListaUsuariosGrupo = "qtd-itens-lista-grupo";
+    this.listaUsuariosGrupo = [];
+
     this.idChatInputAtualizacao = chat.id;
 
     this.apresentaUsuario = "";
 
     this.chatService.findByIdChat(chat.id).subscribe((resp: Chat) => {
       this.chat = resp;
+      this.imgConversaUsuario = resp.img;
+
       console.log("CHAT DO FINDBYIDCHAT");
       console.log(this.chat);
+
     });
 
     this.validaTipoDeChat(chat);
@@ -163,6 +180,8 @@ export class HomeComponent implements OnInit {
       });
 
     }, 10);*/
+
+    this.inicioChat = "remove-inicio-chat";
 
   }
 
@@ -299,23 +318,63 @@ export class HomeComponent implements OnInit {
   apresentaUsuarios(nomeChat: string) {
     this.chat = new Chat();
 
-    if(nomeChat.length > 0) {
-      this.findAllUsuariosConversa();
+    /*let contadorUsuariosGrupo: number = this.listaUsuariosGrupo.length;
 
+    if(!this.listaUsuariosGrupo == undefined || !this.listaUsuariosGrupo == null) {
+      this.listaUsuariosGrupo.map(item => {
+        contadorUsuariosGrupo++;
+
+      });
+
+    }*/
+
+    if(nomeChat.length > 0) {
+      this.apresentaUsuario = "remove-block";
       this.addUsuarioChatClass = "add-usuario-chat";
+      this.removeListaUsuariosGrupo = "";
+
+      this.nomeChat = "Usuarios para o grupo: ";
+      this.imgConversaUsuario = "../../assets/img/perfil.svg";
+
+      this.findAllUsuariosConversa();
 
     }else {
       this.listDeUsuario = [];
+      this.listaUsuariosGrupo = [];
 
+      this.nomeChat = "";
       this.addUsuarioChatClass = "";
+      this.removeListaUsuariosGrupo = "qtd-itens-lista-grupo";
 
     }
+
+    this.inicioChat = "remove-inicio-chat";
 
   }
 
   gerenciaChat(usuario: Usuario) {
 
-    this.usuarioService.chatOuGrupo(this.id, usuario.id).subscribe((resp: Usuario) => {
+    const indexOfObject = this.listaUsuariosGrupo.findIndex((object) => {
+      return object.id === usuario.id;
+    });
+
+    console.log(indexOfObject); // -> 1
+
+    if (indexOfObject !== -1) {
+      this.listaUsuariosGrupo.splice(indexOfObject, 1);
+
+    }else {
+      this.listaUsuariosGrupo.push(usuario);
+
+    }
+
+    console.log(this.listaUsuariosGrupo);
+
+  }
+
+  addUsuariosAoGrupo() {
+
+    /*this.usuarioService.chatOuGrupo(this.id, usuario.id).subscribe((resp: Usuario) => {
       console.log("Chat criado com sucesso.");
 
       this.findAllChatsbyIdUsuario(this.id);
@@ -323,7 +382,76 @@ export class HomeComponent implements OnInit {
     }, erro => {
       console.log("Ocorreu um problema com a criacao do chat.");
 
+    });*/
+
+    //this.novoChat.img = usuario.img;
+    this.novoChat.img = "https://i0.wp.com/emotioncard.com.br/wp-content/uploads/2016/05/perfil-whatsapp.jpg?fit=600%2C600&ssl=1";
+    this.novoChat.tipo = "grupo";
+
+    // CRIAR O GRUPO
+    this.chatService.postChat(this.novoChat).subscribe((resp: Chat) => {
+      console.log("resp chat:");
+      console.log(resp);
+
+      // ADICIONA O PRIMEIRO USUARIO <CRIADOS DO GRUPO>
+      this.usuarioService.chatOuGrupo(this.id, resp.id).subscribe((resp: Usuario) => {
+
+      });
+
+      // UTILIZA O ARRAY DE USUARIOS PARA INSERIR OS USUARIOS AO GRUPO RECEM CRIADO
+      this.listaUsuariosGrupo.map(item => {
+
+        // ADICIONA OS USUARIOS CARREGADOS NA LISTA <DEMAIS USUARIOS>
+        this.usuarioService.chatOuGrupo(item.id, resp.id).subscribe((resp: Usuario) => {
+          console.log("Usuarios inserido no grupo com sucesso");
+
+        }, erro => {
+          console.log("Ocorreu um erro ao tentar adicionar o usuario ao grupo");
+
+        });
+
+      }, 2);
+
+      let memoriaArrayChat = this.chatArray.length;
+
+      setTimeout(() => {
+
+        this.findAllChatsbyIdUsuario(this.id);
+
+        this.apresentaUsuario = "";
+        this.listDeUsuario = [];
+
+        setTimeout(() => {
+          this.chatService.findByIdChat(resp.id).subscribe((resp: Chat) => {
+            this.findByIdChat(resp);
+
+            this.novoChat = new Chat();
+
+          });
+
+        }, 2);
+
+        if(memoriaArrayChat == this.chatArray.length) {
+          setTimeout(() => {
+            this.findAllChatsbyIdUsuario(this.id);
+
+          },3);
+
+        }
+
+      }, 1);
+
+      this.apresentaUsuario = "add-usuario-chat";
+      this.addUsuarioChatClass = "remove-block";
+      this.removeListaUsuariosGrupo = "qtd-itens-lista-grupo";
+      this.imgConversaUsuario = resp.img;
+
+      this.novoChat = new Chat();
+
     });
+
+    console.log("Chat depois: ");
+    console.log(this.novoChat);
 
   }
 
@@ -453,6 +581,8 @@ export class HomeComponent implements OnInit {
       }
 
     }, 0.500);
+
+    this.inicioChat = "remove-inicio-chat";
 
   }
 

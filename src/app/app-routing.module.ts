@@ -1,3 +1,4 @@
+import { EditarComponent } from './editar/editar.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'editar/:id',
+    component: EditarComponent
   }
 ];
 

@@ -11,13 +11,15 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { OrderModule } from 'ngx-order-pipe';
 import { FormsModule } from '@angular/forms';
+import { EditarComponent } from './editar/editar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    CadastroComponent
+    CadastroComponent,
+    EditarComponent
   ],
   imports: [
     BrowserModule,

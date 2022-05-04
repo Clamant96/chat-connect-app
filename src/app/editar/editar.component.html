@@ -6,7 +6,12 @@
 
       <div class="dados-usuario">
 
-        <h1>Cadastrar</h1>
+        <h1>
+          <div class="img">
+            <img src="{{usuario.img}}" alt="{{usuario.username}}">
+          </div>
+          {{usuario.username}}
+        </h1>
         <div class="form-group">
             <label for="usuario">Usuário</label>
             <!-- [(ngModel)] ==> AMAZENA OS DADOS INSERIDOS PELO USUARIO DENTRO DA MODEL -->
@@ -30,14 +35,8 @@
         <div class="botoes">
             <button type="submit" routerLink="/login">Cancelar</button>
             <!-- (click) ==> CHAMA UM METODO PARA REALIZAR O CADASTRO DENTRO DA APLICACAO, VALIDANDO OS DADOS INSERIDOS -->
-            <button (mouseover)='botaoCadastrarAnimacaoOver()' (mouseout)='botaoCadastrarAnimacaoOut()' type="submit" class="botao-cadastar" (click)='cadastrar()'>Atualizar</button>
+            <button (mouseover)='botaoCadastrarAnimacaoOver()' (mouseout)='botaoCadastrarAnimacaoOut()' type="submit" class="botao-cadastar" (click)='atualizar()'>Atualizar</button>
         </div>
-
-        <div class="hr">
-          <hr />
-        </div>
-
-        <p class="link">Ja tem um cadastro? <a routerLink="/login">Login</a></p>
 
       </div>
 

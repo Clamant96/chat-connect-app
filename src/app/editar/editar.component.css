@@ -29,7 +29,7 @@
 
   background-color: var(--background-add-grupo);
   /*background-image: url(https://i.imgur.com/iuaLq7p.jpg);*/
-  background-image: url(../../assets/img/background_sistema.svg);
+  background-image: url(../../assets/img/background_sistema_animado.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -173,49 +173,6 @@
 
 .section .container-section .lista-categoria .dados-usuario .botoes .botao-cadastar:hover {
   background-color: var(--background-header-h1);
-
-}
-
-.section .container-section .lista-categoria .dados-usuario .link {
-  font-weight: 100;
-  font-family: 'Amaranth', sans-serif;
-
-  color: var(--text-white);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
-.section .container-section .lista-categoria .dados-usuario .link a {
-  margin-left: 2%;
-
-  text-decoration: none;
-
-  font-weight: 700;
-
-  color: var(--text-white);
-
-  transition: color, .3s ease;
-
-}
-
-.section .container-section .lista-categoria .dados-usuario .link a:hover {
-  color: var(--background-mesagem-usuario);
-
-}
-
-.section .container-section .lista-categoria .dados-usuario .hr {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
-.section .container-section .lista-categoria .dados-usuario .hr hr {
-  width: 50% !important;
-  height: auto;
 
 }
 

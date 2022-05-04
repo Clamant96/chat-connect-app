@@ -2,8 +2,8 @@
   <div class="container-section">
     <nav class="menu-responsivo" >
       <ul>
-        <div class="perfil">
-          <div class="img">
+        <div class="perfil" data-toggle="tooltip" data-placement="bottom" title="{{username}}" >
+          <div class="img" [routerLink]="['/editar', id]" >
             <img src="{{avatar}}" alt="{{username}}">
           </div>
           <p class="username">
@@ -21,8 +21,8 @@
           </button>
 
         </div>
-        <div class="cria-scrolling-chat" *ngFor='let item of chatArray' >
-          <a routerLink="/home" (click)='findByIdChat(item)' >
+        <div class="cria-scrolling-chat" >
+          <a routerLink="/home" (click)='findByIdChat(item)' *ngFor='let item of chatArray' >
             <img src="{{item.img}}" alt="{{item.nome}}" />
             <p class="texto" >
               {{item.nome}}
@@ -36,11 +36,17 @@
     </nav>
     <div class="lista-categoria">
       <div class="background-imagem-chat">
+        <div class="{{inicioChat}}">
+          <img src="../../assets/img/inicio_chat_3.svg" alt="inicio-chat" />
+        </div>
         <h1>
           <div class="img">
             <img src="{{imgConversaUsuario}}" alt="{{nomeChat}}">
           </div>
-          {{nomeChat}}
+          {{nomeChat}} <p class="ajuste-qtd {{removeListaUsuariosGrupo}}">{{listaUsuariosGrupo.length}}</p>
+          <button class="ajuste-botao {{removeListaUsuariosGrupo}}" *ngIf="listaUsuariosGrupo.length > 0" (click)='addUsuariosAoGrupo()'>
+            {{novoChat.nome}}
+          </button>
         </h1>
         <ul>
           <div class="cria-scrolling-chat">

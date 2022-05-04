@@ -52,6 +52,11 @@ export class UsuarioService {
     return this.http.post<Usuario>(`${this.serverPort}/usuarios/cadastrar`, usuario);
   }
 
+  atualizar(usuario: Usuario): Observable<Usuario> {
+
+    return this.http.put<Usuario>(`${this.serverPort}/usuarios/atualizar`, usuario, this.autorizacao);
+  }
+
   /* RETONA UM VALOR true OU false CASO O TOKEN ESTA PREENCHIDO, CASO ESTEJA VAZIO RETONA false, CASO ESTEJA COM DADOS RETONA true*/
   logado() {
     /* CRIA UMA VARIAVEL BOOLEAN */
