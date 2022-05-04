@@ -40,7 +40,9 @@
 [x] - Ajuste de layouts
 
 ### V1.2
-![alt text](<url_img_github>?raw=true)
+![alt text](https://github.com/Clamant96/chat-connect-app/blob/main/src/assets/img/projeto-v1.2.png?raw=true)
+### V1.2.1
+![alt text](https://github.com/Clamant96/chat-connect-app/blob/main/src/assets/img/projeto-v1.2.1.png?raw=true)
 [x] - Cadastro <br />
 [x] - Login <br />
 [x] - Criacao de chats <br />
@@ -53,7 +55,11 @@
 [x] - Implementação de tela inicial caso nao tenha selecionado ou criado nenhuma coversa ainda
 
 ### V1.3
-![alt text](<url_img_github>?raw=true)
+![alt text](https://github.com/Clamant96/chat-connect-app/blob/main/src/assets/img/projeto-v1.3.png?raw=true)
+### V1.3.1
+![alt text](https://github.com/Clamant96/chat-connect-app/blob/main/src/assets/img/projeto-v1.3.1.png?raw=true)
+### V1.3.2
+![alt text](https://github.com/Clamant96/chat-connect-app/blob/main/src/assets/img/projeto-v1.3.2.png?raw=true)
 [x] - Cadastro <br />
 [x] - Login <br />
 [x] - Criacao de chats <br />
