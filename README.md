@@ -13,7 +13,8 @@
 [x] - Ajuste de layouts <br />
 [x] - Criação de grupos <br />
 [x] - Implementação de tela inicial caso nao tenha selecionado ou criado nenhuma coversa ainda <br />
-[] - Edição de perfil <br />
+[x] - Edição de perfil <br />
+[x] - Alteração de CSS para os components de Login e Cadastro <br />
 [] - Criptografia de conversas <br />
 [] - Implementação de emoticons dentro de conversas <br />
 [] - Implementação de figurinhas dentro de conversas <br />
