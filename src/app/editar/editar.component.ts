@@ -67,7 +67,7 @@ export class EditarComponent implements OnInit {
         /* REDIRECIONA O USUARIO A PAGINA DE login APOS O CADASTRO TER SIDO REALIZADO COM SUCESSO */
         this.router.navigate(['/login']);
         /* INFORMA UM ALERTA AO USUARIO DE CADASTRO BEM SUCEDIDO */
-        alert('Usuario cadastrado com sucesso!');
+        alert('Usuario atualizado com sucesso!');
 
         /* CASO OCORRA UMA MENSAGEM DE ERRO, MOSTRA ESSE ERRO NO CONSOLE */
       }, erro => {
