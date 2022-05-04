@@ -102,6 +102,11 @@ export class HomeComponent implements OnInit {
 
     if(this.idChatInputAtualizacao > 0) {
       this.chatService.findByIdChat(this.idChatInputAtualizacao).subscribe((resp: Chat) => {
+
+        resp.conversas.map(item => {
+          item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
+        });
+
         this.chat = resp;
         console.log('RECEBENDO INPUT PARA ATUALIZAR CHAT');
         console.log(resp);
@@ -164,7 +169,13 @@ export class HomeComponent implements OnInit {
     this.apresentaUsuario = "";
 
     this.chatService.findByIdChat(chat.id).subscribe((resp: Chat) => {
+
+      resp.conversas.map(item => {
+        item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
+      });
+
       this.chat = resp;
+
       this.imgConversaUsuario = resp.img;
 
       console.log("CHAT DO FINDBYIDCHAT");
@@ -275,6 +286,12 @@ export class HomeComponent implements OnInit {
       this.conversa.usuario = this.usuarioConversa;
       this.conversa.chat = this.chatConversa;
 
+      /* CRIPTOGRAFAR DADOS BASE64 */
+      // ENCODE -> btoa("TESTE BASE 64");
+      // DECODE -> atob("cGFzc3dvcmQ=");
+      this.conversa.conteudo = btoa(this.conversa.conteudo);
+      /* ------------------------- */
+
       console.log(this.conversa);
 
       this.conversaMemoria.conteudo = this.conversa.conteudo;
@@ -288,6 +305,10 @@ export class HomeComponent implements OnInit {
         });
 
         this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
+          resp.conversas.map(item => {
+            item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
+          });
+
           this.conversaMemoria.chat = resp;
         });
 
@@ -301,6 +322,10 @@ export class HomeComponent implements OnInit {
       });
 
       this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
+        resp.conversas.map(item => {
+          item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
+        });
+
         this.chat = resp;
       });
 
