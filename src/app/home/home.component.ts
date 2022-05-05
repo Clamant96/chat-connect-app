@@ -103,9 +103,9 @@ export class HomeComponent implements OnInit {
     if(this.idChatInputAtualizacao > 0) {
       this.chatService.findByIdChat(this.idChatInputAtualizacao).subscribe((resp: Chat) => {
 
-        resp.conversas.map(item => {
+        /*resp.conversas.map(item => {
           item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
-        });
+        });*/
 
         this.chat = resp;
         console.log('RECEBENDO INPUT PARA ATUALIZAR CHAT');
@@ -145,6 +145,9 @@ export class HomeComponent implements OnInit {
 
           });
 
+        } else {
+          this.imgConversaUsuario = "https://i0.wp.com/emotioncard.com.br/wp-content/uploads/2016/05/perfil-whatsapp.jpg?fit=600%2C600&ssl=1";
+
         }
 
       });
@@ -170,16 +173,40 @@ export class HomeComponent implements OnInit {
 
     this.chatService.findByIdChat(chat.id).subscribe((resp: Chat) => {
 
-      resp.conversas.map(item => {
+      /*resp.conversas.map(item => {
         item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
-      });
+      });*/
 
       this.chat = resp;
+      // this.imgConversaUsuario = resp.img;
 
-      this.imgConversaUsuario = resp.img;
+      if(resp.tipo == "chat") {
+        console.log("E CHAT");
+
+        resp.usuarios.map(i => {
+
+          if(i.id != this.id) {
+
+            this.usuarioService.findByIdUsuario(i.id).subscribe((resp: Usuario) => {
+              this.imgConversaUsuario = resp.img;
+            });
+
+          }
+
+        });
+
+        console.log("this.imgConversaUsuario: "+ this.imgConversaUsuario);
+
+      }else {
+        console.log("NAO E CHAT");
+        this.imgConversaUsuario = "https://i0.wp.com/emotioncard.com.br/wp-content/uploads/2016/05/perfil-whatsapp.jpg?fit=600%2C600&ssl=1";
+
+      }
 
       console.log("CHAT DO FINDBYIDCHAT");
       console.log(this.chat);
+
+      console.log("this.imgConversaUsuario: "+ this.imgConversaUsuario);
 
     });
 
@@ -289,7 +316,7 @@ export class HomeComponent implements OnInit {
       /* CRIPTOGRAFAR DADOS BASE64 */
       // ENCODE -> btoa("TESTE BASE 64");
       // DECODE -> atob("cGFzc3dvcmQ=");
-      this.conversa.conteudo = btoa(this.conversa.conteudo);
+      // this.conversa.conteudo = btoa(this.conversa.conteudo);
       /* ------------------------- */
 
       console.log(this.conversa);
@@ -305,9 +332,9 @@ export class HomeComponent implements OnInit {
         });
 
         this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
-          resp.conversas.map(item => {
+          /*resp.conversas.map(item => {
             item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
-          });
+          });*/
 
           this.conversaMemoria.chat = resp;
         });
@@ -322,9 +349,9 @@ export class HomeComponent implements OnInit {
       });
 
       this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
-        resp.conversas.map(item => {
+        /*resp.conversas.map(item => {
           item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
-        });
+        });*/
 
         this.chat = resp;
       });
@@ -494,7 +521,7 @@ export class HomeComponent implements OnInit {
 
         let valor: string = String(i.id);
 
-        if(valor.includes(String(usuario.id))) {
+        if(valor.includes(String(usuario.id)) && item.tipo == "chat") {
           jaExisteEmMinhaLista = true;
           gravaChatReload = item;
         }
@@ -503,7 +530,7 @@ export class HomeComponent implements OnInit {
 
     });
 
-    if(!jaExisteEmMinhaLista) {
+    if(!jaExisteEmMinhaLista) { // NAO EXISTE
       // criar o chat
       this.chatService.postChat(this.novoChat).subscribe((resp: Chat) => {
         console.log("resp chat:");
@@ -546,7 +573,7 @@ export class HomeComponent implements OnInit {
       console.log("Chat depois: ");
       console.log(this.novoChat);
 
-    }else {
+    }else { // JA EXISTE
       this.findByIdChat(gravaChatReload);
 
       this.apresentaUsuario = "add-usuario-chat";

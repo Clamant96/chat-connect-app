@@ -15,7 +15,7 @@
 [x] - Implementação de tela inicial caso nao tenha selecionado ou criado nenhuma coversa ainda <br />
 [x] - Edição de perfil <br />
 [x] - Alteração de CSS para os components de Login e Cadastro <br />
-[x] - Criptografia de conversas <br />
+[] - Criptografia de conversas - REALIZADO ROLLBACK, devido a perda de desempenho <br />
 [] - Implementação de emoticons dentro de conversas <br />
 [] - Implementação de figurinhas dentro de conversas <br />
 [] - Implementação de alteração de modo noturno, dia ou automatico
@@ -88,7 +88,7 @@
 [x] - Implementação de tela inicial caso nao tenha selecionado ou criado nenhuma coversa ainda <br />
 [x] - Edição de perfil <br />
 [x] - Alteração de CSS para os components de Login e Cadastro <br />
-[x] - Criptografia de conversas
+[] - Criptografia de conversas
 
 ### V1.5
 ![alt text](<url_img_github>?raw=true)
@@ -104,7 +104,7 @@
 [x] - Implementação de tela inicial caso nao tenha selecionado ou criado nenhuma coversa ainda <br />
 [x] - Edição de perfil <br />
 [x] - Alteração de CSS para os components de Login e Cadastro <br />
-[x] - Criptografia de conversas <br />
+[] - Criptografia de conversas <br />
 [] - Implementação de emoticons dentro de conversas
 
 ### V1.6
@@ -121,7 +121,7 @@
 [x] - Implementação de tela inicial caso nao tenha selecionado ou criado nenhuma coversa ainda <br />
 [x] - Edição de perfil <br />
 [x] - Alteração de CSS para os components de Login e Cadastro <br />
-[x] - Criptografia de conversas <br />
+[] - Criptografia de conversas <br />
 [] - Implementação de emoticons dentro de conversas <br />
 [] - Implementação de figurinhas dentro de conversas
 
@@ -139,7 +139,7 @@
 [x] - Implementação de tela inicial caso nao tenha selecionado ou criado nenhuma coversa ainda <br />
 [x] - Edição de perfil <br />
 [x] - Alteração de CSS para os components de Login e Cadastro <br />
-[x] - Criptografia de conversas <br />
+[] - Criptografia de conversas <br />
 [] - Implementação de emoticons dentro de conversas <br />
 [] - Implementação de figurinhas dentro de conversas <br />
 [] - Implementação de alteração de modo noturno, dia ou automatico

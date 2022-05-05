@@ -439,6 +439,8 @@
 .section .container-section .lista-categoria ul .cria-scrolling-chat::-webkit-scrollbar {
   width: 5px;
 
+  scroll-behavior: smooth;
+
 }
 
 .section .container-section .lista-categoria ul .cria-scrolling-chat::-webkit-scrollbar-thumb {
