@@ -49,6 +49,8 @@ export class HomeComponent implements OnInit {
   apresentaUsuario: string = "";
   removeListaUsuariosGrupo: string = "qtd-itens-lista-grupo";
   inicioChat: string = "inicio-chat";
+  retiraChat: string = "";
+  retiraUsuarios: string = "";
   //ultimaMensagem: string = "";
 
   idChatInputAtualizacao: number = 0;
@@ -85,6 +87,16 @@ export class HomeComponent implements OnInit {
     );
 
     //this.start();
+
+    try {
+      if(window.innerWidth <= 760) {
+        this.retiraChat = "desabilita-temporariamente"; // GERENCIA TELAS A SEREM ABERTAS EM TELAS PEQUENAS
+
+      }
+
+    }catch(erro) {
+
+    }
 
     this.findAllChatsbyIdUsuario(this.id);
 
@@ -157,6 +169,19 @@ export class HomeComponent implements OnInit {
   }
 
   findByIdChat(chat: Chat) {
+    try {
+      if(window.innerWidth <= 760) {
+        if(this.retiraChat.length > 0) {
+          this.retiraChat = "";
+          this.retiraUsuarios = "desabilita-temporariamente";
+        }
+
+      }
+
+    }catch(erro) {
+
+    }
+
     this.listDeUsuario = [];
     this.chatMemoria = chat;
 
@@ -368,6 +393,8 @@ export class HomeComponent implements OnInit {
   }
 
   apresentaUsuarios(nomeChat: string) {
+    this.voltarUsuarios(); // AJUSTA TELAS PARA OTIMIZACAO DE CSS
+
     this.chat = new Chat();
 
     /*let contadorUsuariosGrupo: number = this.listaUsuariosGrupo.length;
@@ -600,6 +627,8 @@ export class HomeComponent implements OnInit {
 
   apresentaUsuarioParaChat() {
 
+    this.voltarUsuarios(); // AJUSTA TELAS PARA OTIMIZACAO DE CSS
+
     var comprimentoLista: number = 0;
 
     try {
@@ -635,6 +664,27 @@ export class HomeComponent implements OnInit {
     }, 0.500);
 
     this.inicioChat = "remove-inicio-chat";
+
+  }
+
+  voltarUsuarios() {
+    try {
+      if(window.innerWidth <= 760) {
+        if(this.retiraChat.length == 0) {
+          this.retiraUsuarios = "";
+          this.retiraChat = "desabilita-temporariamente";
+
+        }else {
+          this.retiraChat = "";
+          this.retiraUsuarios = "desabilita-temporariamente";
+
+        }
+
+      }
+
+    }catch(erro) {
+
+    }
 
   }
 
