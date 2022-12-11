@@ -1,0 +1,211 @@
+<section class="section">
+  <div class="container-section">
+    <nav class="menu-responsivo {{retiraUsuarios}}" >
+      <ul>
+        <div class="perfil" data-toggle="tooltip" data-placement="bottom" title="{{username}}" >
+          <div class="img" [routerLink]="['/editar', id]" >
+            <img src="{{avatar}}" alt="{{username}}">
+          </div>
+          <p class="username">
+            {{username}}
+          </p>
+        </div>
+        <div class="novo-grupo">
+          <input *ngIf="this.itemGrupo" [(ngModel)]='novoChat.nome' type="text" name="novoChat" id="novoChat" placeholder="Novo Grupo" (change)='apresentaUsuarios(novoChat.nome)' />
+
+          <button *ngIf="this.itemGrupo" type="submit" data-toggle="tooltip" data-placement="bottom" title="Novo Grupo" (click)='apresentaUsuariosParaGrupo()' >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wechat" viewBox="0 0 16 16">
+              <path d="M11.176 14.429c-2.665 0-4.826-1.8-4.826-4.018 0-2.22 2.159-4.02 4.824-4.02S16 8.191 16 10.411c0 1.21-.65 2.301-1.666 3.036a.324.324 0 0 0-.12.366l.218.81a.616.616 0 0 1 .029.117.166.166 0 0 1-.162.162.177.177 0 0 1-.092-.03l-1.057-.61a.519.519 0 0 0-.256-.074.509.509 0 0 0-.142.021 5.668 5.668 0 0 1-1.576.22ZM9.064 9.542a.647.647 0 1 0 .557-1 .645.645 0 0 0-.646.647.615.615 0 0 0 .09.353Zm3.232.001a.646.646 0 1 0 .546-1 .645.645 0 0 0-.644.644.627.627 0 0 0 .098.356Z"/>
+              <path d="M0 6.826c0 1.455.781 2.765 2.001 3.656a.385.385 0 0 1 .143.439l-.161.6-.1.373a.499.499 0 0 0-.032.14.192.192 0 0 0 .193.193c.039 0 .077-.01.111-.029l1.268-.733a.622.622 0 0 1 .308-.088c.058 0 .116.009.171.025a6.83 6.83 0 0 0 1.625.26 4.45 4.45 0 0 1-.177-1.251c0-2.936 2.785-5.02 5.824-5.02.05 0 .1 0 .15.002C10.587 3.429 8.392 2 5.796 2 2.596 2 0 4.16 0 6.826Zm4.632-1.555a.77.77 0 1 1-1.54 0 .77.77 0 0 1 1.54 0Zm3.875 0a.77.77 0 1 1-1.54 0 .77.77 0 0 1 1.54 0Z"/>
+            </svg>
+          </button>
+
+          <div *ngIf="this.itemChat" class="grupo-btn ajuste-btn" (click)="gerenciaChatOuGrupo()">
+            <p>Novo Grupo</p>
+          </div>
+
+          <button *ngIf="this.itemChat" type="submit" data-toggle="tooltip" data-placement="bottom" title="Novo Chat" (click)='apresentaUsuarioParaChat()' >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+              <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+              <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+          </button>
+
+        </div>
+        <div class="cria-scrolling-chat" >
+          <a routerLink="/home" (click)='findByIdChat(item)' *ngFor='let item of chatArray' >
+            <img src="{{item.img}}" alt="{{item.nome}}" />
+            <p class="texto" >
+              {{item.nome}}
+            </p>
+            <!--<p class="texto" (click)='findByIdChat(item)' >
+              {{ultimaMensagem}}
+            </p>-->
+          </a>
+        </div>
+      </ul>
+    </nav>
+    <div class="lista-categoria {{retiraChat}}" >
+      <div class="background-imagem-chat">
+        <div class="{{inicioChat}}">
+          <img src="assets/img/inicio_chat_3.svg" alt="inicio-chat" />
+        </div>
+        <h1>
+          <div class="icone-voltar" (click)="voltarUsuarios()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+          </div>
+          <div class="img">
+            <img src="{{imgConversaUsuario}}" alt="{{nomeChat}}">
+          </div>
+          {{nomeChat}} <p class="ajuste-qtd {{removeListaUsuariosGrupo}}">{{listaUsuariosGrupo.length}}</p>
+          <button class="ajuste-botao {{removeListaUsuariosGrupo}}" *ngIf="listaUsuariosGrupo.length > 0" (click)='addUsuariosAoGrupo()'>
+            {{novoChat.nome}}
+          </button>
+        </h1>
+        <ul>
+          <div class="cria-scrolling-chat">
+
+            <div class="{{apresentaUsuario}}">
+              <a *ngFor='let item of listDeUsuario' (click)='abrirNovoChat(item)' >
+                <div class="icone">
+                  <img src="{{item.img}}" alt="{{item.username}}" />
+                </div>
+                <div class="mesagem">
+                  <p class="nome-usuario">
+                    {{item.username}}
+                  </p>
+                </div>
+              </a>
+            </div>
+
+            <div class="{{addUsuarioChatClass}}">
+              <a *ngFor='let item of listDeUsuario' (click)='gerenciaChat(item)' >
+                <div class="icone">
+                  <img src="{{item.img}}" alt="{{item.username}}" />
+                </div>
+                <div class="mesagem">
+                  <p class="nome-usuario">
+                    {{item.username}}
+                  </p>
+                </div>
+              </a>
+            </div>
+
+            <a *ngFor='let item of chat.conversas' >
+              <div *ngIf="item.conteudo != 'img'" class="{{ajustaMensagem(item.usuario.id, id)}}">
+                <div class="icone-perfil-mensagem">
+                  <img src="{{item.usuario.img}}" alt="{{item.usuario.username}}">
+                </div>
+                <div class="mesagem">
+                  <p *ngIf="apresentaNome" class="nome-usuario">
+                    {{item.usuario.username}}
+                  </p>
+                  <p class="conteudo-conversa">
+                    {{item.conteudo}}
+                  </p>
+                  <div class="data-conversa">
+                    <p class="data-conversa-p">
+                      {{item.data | date: 'HH:mm'}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- CONVERSA COM FIGURINHA -->
+              <div *ngIf="item.conteudo == 'img'" class="{{ajustaMensagemFigurinha(item.usuario.id, id)}}">
+                <div class="mesagem-figurinha">
+                  <img src="{{carregaImagem(username,item.img)}}" alt="{{item.conteudo}}" class="conteudo-conversa-figurinha" />
+                  <div class="data-conversa">
+                    <p class="data-conversa-p">
+                      {{item.data | date: 'HH:mm'}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="novo-item-lista {{abreCampoParaVisualizarFigurinhas}}" >
+            <div *ngIf="this.habilitaModalEmojiEfigurinha" class="figurinhas-e-emoji">
+              <div class="imoji {{this.ajustaCorIconeEmoji}}" title="Emojis" (click)="gerenciaModalAberto('imoji')" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M11.315 10.014a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.488 0c1.398-.864 3.544 1.838-.952 3.434-3.067-3.554.19-4.858.952-3.434z"/>
+                </svg>
+              </div>
+              <div class="hr"></div>
+              <div class="figurinha {{this.ajustaCorIconeFigurinha}}" title="Minhas figurinhas" (click)="gerenciaModalAberto('figurinha')" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stickies" viewBox="0 0 16 16">
+                  <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z"/>
+                  <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z"/>
+                </svg>
+              </div>
+              <div class="hr-add-figurinha"></div>
+              <div class="add-figurinha {{this.ajustaCorIconeAddFigurinha}}" title="Adicionar uma nova figurinha" (click)="gerenciaModalAberto('add-figurinha')" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-dotted" viewBox="0 0 16 16">
+                  <path d="M2.5 0c-.166 0-.33.016-.487.048l.194.98A1.51 1.51 0 0 1 2.5 1h.458V0H2.5zm2.292 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zm1.833 0h-.916v1h.916V0zm1.834 0h-.917v1h.917V0zm1.833 0h-.917v1h.917V0zM13.5 0h-.458v1h.458c.1 0 .199.01.293.029l.194-.981A2.51 2.51 0 0 0 13.5 0zm2.079 1.11a2.511 2.511 0 0 0-.69-.689l-.556.831c.164.11.305.251.415.415l.83-.556zM1.11.421a2.511 2.511 0 0 0-.689.69l.831.556c.11-.164.251-.305.415-.415L1.11.422zM16 2.5c0-.166-.016-.33-.048-.487l-.98.194c.018.094.028.192.028.293v.458h1V2.5zM.048 2.013A2.51 2.51 0 0 0 0 2.5v.458h1V2.5c0-.1.01-.199.029-.293l-.981-.194zM0 3.875v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 5.708v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zM0 7.542v.916h1v-.916H0zm15 .916h1v-.916h-1v.916zM0 9.375v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .916v.917h1v-.917H0zm16 .917v-.917h-1v.917h1zm-16 .917v.458c0 .166.016.33.048.487l.98-.194A1.51 1.51 0 0 1 1 13.5v-.458H0zm16 .458v-.458h-1v.458c0 .1-.01.199-.029.293l.981.194c.032-.158.048-.32.048-.487zM.421 14.89c.183.272.417.506.69.689l.556-.831a1.51 1.51 0 0 1-.415-.415l-.83.556zm14.469.689c.272-.183.506-.417.689-.69l-.831-.556c-.11.164-.251.305-.415.415l.556.83zm-12.877.373c.158.032.32.048.487.048h.458v-1H2.5c-.1 0-.199-.01-.293-.029l-.194.981zM13.5 16c.166 0 .33-.016.487-.048l-.194-.98A1.51 1.51 0 0 1 13.5 15h-.458v1h.458zm-9.625 0h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zm1.834-1v1h.916v-1h-.916zm1.833 1h.917v-1h-.917v1zm1.833 0h.917v-1h-.917v1zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                </svg>
+              </div>
+              <!-- PAINEL FIGURINHA -->
+              <div *ngIf="this.renderizaItem == 'figurinha'" class="espaco-de-itens">
+                <!--<img src="../../assets/img/emoticons/db376544-de62-42f2-972d-189188a84131.png" alt="figurinha" (click)='adicionarItemListaFigurinha(id, memoriaIdChat, imgFigurinha)' /> -->
+                <img *ngFor="let figurinha of this.listaFigurinhasDoUsuario" src="{{carregaImagem(username,figurinha.img)}}" alt="{{carregaImagem(username,figurinha.img)}}" (click)='adicionarItemListaFigurinha(id, memoriaIdChat, figurinha.img)' />
+              </div>
+              <!-- PAINEL ADD FIGURINHA -->
+              <div *ngIf="this.renderizaItem == 'add-figurinha'" class="espaco-de-itens">
+                <app-imagem></app-imagem>
+              </div>
+            </div>
+            <div class="img" title="Figurinha" (click)='expandirFigurinhas()' >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sticky" viewBox="0 0 16 16">
+                <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V9.5a.5.5 0 0 1 .5-.5h4.293L9 13.793z"/>
+              </svg>
+            </div>
+            <input [(ngModel)]='conversa.conteudo' type="text" name="lista" id="lista" placeholder="Mensagem" />
+            <button type="submit" (click)='adicionarItemLista(id, memoriaIdChat)' >Enviar</button>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL DE LISTA / PUT -->
+<!-- <div class="modal fade" id="putLista" tabindex="-1" role="dialog" aria-labelledby="modalPutLista" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title texto-bold" id="texto">Atualizar lista</h2>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <input [(ngModel)]='carregaListaParaEdicao.texto' type="text" name="texto" class="modal-input" id="texto" placeholder="Texto">
+        </div>
+        <div class="modal-footer">
+            <button type="button" (click)='atualizaLista()' data-bs-dismiss="modal" aria-label="Close" >Atualizar</button>
+        </div>
+      </div>
+  </div>
+</div> -->
+
+<!-- MODAL DE CATEGORIA / PUT -->
+<!-- <div class="modal fade" id="putCategoria" tabindex="-1" role="dialog" aria-labelledby="modalPutCategoria" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title texto-bold" id="categoria">Atualizar categoria</h2>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <input [(ngModel)]='carregaCategoriaParaEdicao.nome' type="text" name="texto" class="modal-input" id="texto" placeholder="Texto">
+        </div>
+        <div class="modal-footer">
+            <button type="button" (click)='atualizaCategoria()' data-bs-dismiss="modal" aria-label="Close" >Atualizar</button>
+        </div>
+      </div>
+  </div>
+</div> -->

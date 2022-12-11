@@ -1,0 +1,174 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* IMPORTANDO FONTS PARA SEU PROJETO, APARTIR DO GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Amaranth:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600;700;900&display=swap');
+
+/* DEIXANDO A MARGIN E PADDING DE SEU WINDOW ZERADO */
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+/* APLICANDO CONFIGURACOES GLOBAIS PARA SEU PROJETO */
+html {
+    scroll-behavior: smooth;
+
+}
+
+html, body {
+    height: 100%;
+
+    font-family: 'Titillium Web', sans-serif;
+
+    background-color: var(--background-page) !important;
+
+}
+
+/*::-webkit-scrollbar {
+  display: none;
+}*/
+
+/* CLASSES GLOBAIS INICIO */
+.fs-54 {
+    font-size: 54pt !important;
+
+}
+
+/* CLASSES GLOBAIS INICIO */
+.fs-18 {
+    font-size: 18pt;
+
+}
+
+/* APLICANDO CONFIGURACOES GLOBAIS PARA O H1 */
+h1 {
+    font-family: 'Amaranth', sans-serif;
+    font-size: 44px !important;
+    font-weight: 600 !important;
+
+    color: var(--text-title);
+
+}
+
+/* APLICANDO CONFIGURACOES GLOBAIS PARA O H2 */
+h2 {
+    font-family: 'Amaranth', sans-serif;
+    font-size: 28px;
+
+    color: var(--text-title);
+
+}
+
+/* APLICANDO CONFIGURACOES GLOBAIS PARA O H3 */
+h3 {
+    font-size: 14px;
+    font-weight: 400;
+
+    color: var(--text-author);
+
+}
+
+/* APLICANDO CONFIGURACOES GLOBAIS PARA O P */
+p {
+    color: var(--text-default);
+
+    margin: 0 !important;
+
+}
+
+/* APLICANDO CONFIGURACOES GLOBAIS PARA O HR */
+hr {
+    width: 80%;
+    height: auto;
+
+    margin-left: 10%;
+
+    border-top: 0px solid var(--border-style-search);
+    border-left: 0px solid var(--border-style-search);
+    border-right: 0px solid var(--border-style-search);
+    border-bottom: 1px solid var(--text-input) !important;
+
+}
+
+.centralizar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* CRIANDO MACROS/VARIAVEIS PARA REUTILIZACAO DE CORES */
+:root {
+    --text-default: #262626;
+    --text-title: #303030;
+    --text-input: #6e6e6e;
+    --text-author: #00000080;
+    --text-white: #f1f1f1;
+    --text-white-light: #ffffff;
+    --text-link: #191919;
+    --text-white-hora: #c8c6c6;
+    --text-nova-mensagem: #868A7E;
+
+    --color-scrollbar: #3B4247;
+
+    --border-style-search: #e8e8e8;
+    --border-section-home: #2F3B43;
+    --border-section-home2: #242b2f;
+
+    --background-default: #0A1014;
+    --background-color-button: #3bc;
+    --background-color-button-hover: rgb(43, 161, 177);
+    --background-color-copyright: #191919;
+    --background-color-danger: #d60f0f;
+    --background-color-danger-hover: #a01f1f;
+    --background-color-header: #ffffff;
+    --background-section: #ffffff;
+    --background-tarja: #000000;
+    --background-mesagem-usuario: rgba(2,78,65,0.7);
+    --background-mesagem-resposta: #343f46;
+    --background-header-usuario-home: #202C33;
+    --background-foot-nova-mensagem: #202C33;
+    --background-foot-input-nova-mensagem: #2A3942;
+    --background-header-h1: #202C33;
+    --background-add-grupo: #141f27;
+    --background-conversar: #2A3942;
+
+    --button-ok: #b4b4b4;
+
+    --background-page: #fafafa;
+    --background-login: #ffffff;
+    --background-header: #ffffff;
+    --background-section: #ffffff;
+
+    --color-text-black: #262626;
+    --color-text-white: #ffffff;
+    --color-text-gray: #8e8e8e;
+    --color-text-gray-ligth: #dbdbdb;
+    --color-text-blue-text-link-1: #00376b;
+    --color-text-blue-text-link-2: #0095f6;
+
+    --border-gray: #dbdbdb;
+    --border-gray-ligth: #e6e6e6;
+
+    --background-button-blue: #0095f6;
+
+    --box-shadow: #262626;
+
+    --proteinas: #bc5e00;
+    --carboidratos: #f9eac3;
+    --verduras: #008000;
+    --frutas: #ff8c00;
+
+}
+
+/* AJUSTE CONFIGURACAO W3SCHOLLS */
+.w3-button {
+  color: var(--background-color-button-hover) !important;
+}
+
+.w3-button:hover {
+  color: var(--background-color-button-hover) !important;
+  background-color: transparent !important;
+}
