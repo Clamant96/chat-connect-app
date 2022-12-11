@@ -338,7 +338,7 @@
   flex-direction: column;
   justify-content: flex-end;
 
-  background-image: url(../../assets/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d_opacidade_10.png);
+  background-image: var(--background-1);
   background-position: center;
   background-size: 45%;
 
@@ -1957,7 +1957,7 @@
     flex-direction: column;
     justify-content: flex-end;
 
-    background-image: url(../../assets/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d_opacidade_10.png);
+    background-image: var(--background-1);
     background-position: center;
     background-size: 75%;
 
