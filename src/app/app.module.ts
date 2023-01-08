@@ -13,6 +13,7 @@ import { OrderModule } from 'ngx-order-pipe';
 import { FormsModule } from '@angular/forms';
 import { EditarComponent } from './editar/editar.component';
 import { ImagemComponent } from './upload/imagem/imagem.component';
+import { DropComponent } from './upload/drop/drop.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ImagemComponent } from './upload/imagem/imagem.component';
     LoginComponent,
     CadastroComponent,
     EditarComponent,
-    ImagemComponent
+    ImagemComponent,
+    DropComponent
   ],
   imports: [
     BrowserModule,

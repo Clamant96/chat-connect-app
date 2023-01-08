@@ -7,6 +7,7 @@ export class Conversa {
 	public usuario: Usuario;
 	public chat: Chat;
 	public conteudo: string;
+  public conteudoImg: string;
   public img: string;
 
 }

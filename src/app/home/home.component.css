@@ -472,6 +472,206 @@
 
 }
 
+/* == TESTE == */
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .fundo-drop {
+  position: absolute;
+
+  width: 100%;
+  height: 80.5%;
+
+  background-color: var(--background-add-grupo);
+
+  display: none;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .drop_zone {
+  position: absolute;
+
+  width: 50%;
+  height: 80%;
+
+  transition: opacity, .2s ease-in-out;
+
+  background-color: var(--background-add-grupo);
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .drop_zone .img {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-white);
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .drop_zone .img svg {
+  padding: 15%;
+
+  width: 50%;
+  height: auto;
+
+  color: var(--text-white);
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza {
+  position: absolute;
+
+  width: 100%;
+  height: auto;
+
+  transition: opacity, .2s ease-in-out;
+
+  background-color: var(--background-add-grupo);
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .cacelar-envio {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  padding: 1%;
+
+  width: 3.5%;
+  height: auto;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .cacelar-envio svg {
+  width: 100%;
+  height: auto;
+
+  color: var(--text-white);
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .img {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .img img {
+  padding: 5%;
+
+  width: 50%;
+  height: auto;
+
+  border-radius: 0%;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .conteudo-img {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .conteudo-img input {
+  padding: 1% 2%;
+
+  width: 80%;
+  height: auto;
+
+  border: none;
+  border-bottom: 2px solid transparent !important;
+  border-radius: 10px;
+
+  outline: none;
+
+  background-color: var(--background-foot-input-nova-mensagem);
+
+  color: var(--text-nova-mensagem) !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: border-bottom, .3 ease-in-out;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .conteudo-img input:focus {
+  border-bottom: 2px solid var(--text-green-titulo) !important;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .conteudo-img .envio-e-view-img-envio {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .conteudo-img .envio-e-view-img-envio .img {
+  width: 5vw;
+  height: 10vh;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .conteudo-img .envio-e-view-img-envio button {
+  position: absolute;
+
+  right: 0;
+
+  padding: 1% 2%;
+
+  padding-bottom: 1.2%;
+
+  width: 15%;
+  height: auto;
+
+  border: none;
+  border-radius: 5px;
+
+  outline: none;
+
+  background-color: transparent;
+
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat .renderiza .conteudo-img .envio-e-view-img-envio button svg {
+  width: 32%;
+  height: auto;
+
+  color: var(--background-mesagem-usuario);
+
+}
+
+/* =========== */
+
 .section .container-section .lista-categoria ul .cria-scrolling-chat::-webkit-scrollbar {
   width: 5px;
 
@@ -618,6 +818,22 @@
 .section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem {
   width: 100%;
   height: auto;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem .img {
+  padding: 1% 1% 1% 0%;
+
+  width: 100%;
+  height: auto;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem .img img {
+  width: 100%;
+  height: auto;
+
+  border-radius: 5px;
 
 }
 

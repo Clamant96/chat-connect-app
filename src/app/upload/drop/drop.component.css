@@ -1,0 +1,183 @@
+.drop_zone {
+  position: absolute;
+
+  width: 50%;
+  height: 80%;
+
+  transition: opacity, .2s ease-in-out;
+
+  background-color: var(--background-add-grupo);
+
+}
+
+.drop_zone .img {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-white);
+
+}
+
+.drop_zone .img svg {
+  padding: 15%;
+
+  width: 50%;
+  height: auto;
+
+  color: var(--text-white);
+
+}
+
+.renderiza {
+  position: absolute;
+
+  top: 0;
+
+  width: 100%;
+  height: auto;
+
+  transition: opacity, .2s ease-in-out;
+
+  background-color: var(--background-add-grupo);
+
+}
+
+.renderiza .cacelar-envio {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  padding: 1%;
+
+  width: 3.5%;
+  height: auto;
+
+}
+
+.renderiza .cacelar-envio svg {
+  width: 100%;
+  height: auto;
+
+  color: var(--text-white);
+
+}
+
+.renderiza .img {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.renderiza .img img {
+  padding: 5%;
+
+  width: 50%;
+  height: auto;
+
+}
+
+.renderiza .conteudo-img {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.renderiza .conteudo-img input {
+  padding: 1% 2%;
+
+  width: 80%;
+  height: auto;
+
+  border: none;
+  border-bottom: 2px solid transparent !important;
+  border-radius: 10px;
+
+  outline: none;
+
+  background-color: var(--background-foot-input-nova-mensagem);
+
+  color: var(--text-nova-mensagem) !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: border-bottom, .3 ease-in-out;
+
+}
+
+.renderiza .conteudo-img input:focus {
+  border-bottom: 2px solid var(--text-green-titulo) !important;
+
+}
+
+.renderiza .conteudo-img .envio-e-view-img-envio {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+}
+
+.renderiza .conteudo-img .envio-e-view-img-envio .img {
+  width: 5vw;
+  height: 10vh;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}
+
+.renderiza .conteudo-img .envio-e-view-img-envio button {
+  position: absolute;
+
+  right: 0;
+
+  padding: 1% 2%;
+
+  padding-bottom: 1.2%;
+
+  width: 15%;
+  height: auto;
+
+  border: none;
+  border-radius: 5px;
+
+  outline: none;
+
+  background-color: transparent;
+
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.renderiza .conteudo-img .envio-e-view-img-envio button svg {
+  width: 32%;
+  height: auto;
+
+  color: var(--background-mesagem-usuario);
+
+}

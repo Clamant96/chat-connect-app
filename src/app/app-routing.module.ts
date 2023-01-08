@@ -1,3 +1,4 @@
+import { DropComponent } from './upload/drop/drop.component';
 import { EditarComponent } from './editar/editar.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'editar/:id',
     component: EditarComponent
+  },
+  {
+    path: 'drop',
+    component: DropComponent
   }
 ];
 

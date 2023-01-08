@@ -16,6 +16,13 @@ import { environment } from 'src/environments/environment.prod';
 /*import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';*/
 
+class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
+
+  constructor(public src: string, public file: File) {}
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -85,6 +92,19 @@ export class HomeComponent implements OnInit {
   /* OBJ FIGURINHA */
   public listaFigurinhasDoUsuario: Figurinha[];
 
+  /* ENVIO DE POSTAGEM COM IMG */
+  selectedFile: ImageSnippet;
+
+  file: File;
+
+  img: string = "" // IMG CARREGADA PARA POSTAGEM
+
+  urlImg: any;
+  msg: string = "";
+
+  imgRenderizada: string = "";
+
+  conteudoConversa: string = "";
 
   /* WebSocket - CONFIGURACAO */
   items: any[] = [];
@@ -97,7 +117,8 @@ export class HomeComponent implements OnInit {
     private conversaService: ConversaService,
     private websocketService: WebsocketService,
     private router: Router,
-    private figurinhaService: FigurinhaService
+    private figurinhaService: FigurinhaService,
+    private imageService: ImagemService
 
   ) { }
 
@@ -129,6 +150,9 @@ export class HomeComponent implements OnInit {
 
     this.findAllChatsbyIdUsuario(this.id);
     this.findAllFigurinhasByUsuarioId(this.id);
+
+    this.gerenciaOpacidadeTelaDrop(false);
+    this.rederizaImagemDrop(false);
 
   }
 
@@ -919,5 +943,164 @@ export class HomeComponent implements OnInit {
     // return `${this.url}/image/carregar/${username}/${img}`;
     return `${this.url}/image/carregar/${img}`;
   }
+
+  dropHandler(ev: any) {
+    console.log('File(s) dropped');
+
+    this.gerenciaOpacidadeTelaDrop(false);
+    this.rederizaImagemDrop(true);
+
+    // Impedir o comportamento padrão (impedir que o arquivo seja aberto)
+    ev.preventDefault();
+
+    if (ev.dataTransfer.items) {
+      // Use a interface DataTransferItemList para acessar o (s) arquivo (s)
+      for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+        // Se os itens soltos não forem arquivos, rejeite-os
+        if (ev.dataTransfer.items[i].kind === 'file') {
+          // var file = ev.dataTransfer.items[i].getAsFile();
+          this.file = ev.dataTransfer.items[i].getAsFile();
+          // console.log('... file[' + i + '].name = ' + file.name);
+          console.log('... file[' + i + '].name = ' + this.file.name);
+
+          this.processFile(ev.dataTransfer); // PROCESSA A IMAGEM NO SERVIDOR
+
+        }
+      }
+    } else {
+      // Use a interface DataTransfer para acessar o (s) arquivo (s)
+      for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+        console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+      }
+    }
+  }
+
+  dragOverHandler(ev: any) {
+    console.log('File(s) in drop zone');
+
+    this.gerenciaOpacidadeTelaDrop(true);
+
+    // Impedir o comportamento padrão (impedir que o arquivo seja aberto)
+    ev.preventDefault();
+
+  }
+
+  gerenciaOpacidadeTelaDrop(estadoDrop: boolean) {
+
+    if(estadoDrop) {
+      window.document.querySelector('.drop_zone')?.setAttribute('style', 'opacity: 1; width: 100%;');
+      window.document.querySelector('.fundo-drop')?.setAttribute('style', 'display: block;');
+
+    }else {
+      window.document.querySelector('.drop_zone')?.setAttribute('style', 'opacity: 0; width: 50%;');
+      window.document.querySelector('.fundo-drop')?.setAttribute('style', 'display: none;');
+
+    }
+
+  }
+
+  rederizaImagemDrop(estadoDrop: boolean) {
+    if(estadoDrop) {
+      window.document.querySelector('.renderiza')?.setAttribute('style', 'display: block;');
+      window.document.querySelector('.fundo-drop')?.setAttribute('style', 'display: block;');
+
+    }else {
+      window.document.querySelector('.renderiza')?.setAttribute('style', 'display: none;');
+      window.document.querySelector('.fundo-drop')?.setAttribute('style', 'display: none;');
+
+    }
+
+  }
+
+  adicionarItemListaPortagemComImg(idUsuario: number, idChat: number) {
+
+    try {
+
+      this.usuarioConversa.id = idUsuario;
+      this.chatConversa.id = idChat;
+
+      this.conversa.usuario = this.usuarioConversa;
+      this.conversa.chat = this.chatConversa;
+      this.conversa.conteudo = this.conteudoConversa;
+
+      console.log("CONVERSA ENVIADA: ");
+      console.log(this.conversa);
+
+      this.conversaService.postConversa(this.conversa).subscribe((resp: Conversa) => {
+        console.log('Conversa enviada com sucesso.');
+
+        this.rederizaImagemDrop(false);
+
+        setTimeout(() => {
+          this.start();
+
+        }, 500);
+
+        this.conversa = new Conversa();
+
+      }, erro => {
+        console.log('Ocorreu um erro no envio da conversa.');
+
+      });
+
+    }catch(erro) {
+      console.log(erro);
+    }
+
+  }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    this.viewFileImg(imageInput.files);
+
+      reader.addEventListener('load', (event: any) => {
+
+        this.selectedFile = new ImageSnippet(event.target.result, file);
+
+        this.selectedFile.pending = true;
+
+        this.imageService.uploadImage(this.selectedFile.file).subscribe(
+          (res) => {
+            console.log(res);
+
+            this.conversa.img = `${environment.username}/${environment.nomeUplaodImagem}`;
+            this.conversa.conteudoImg = `${environment.username}/${environment.nomeUplaodImagem}`;
+
+            this.imgRenderizada = `${environment.server}${environment.port}/image/carregar/${this.conversa.conteudoImg}`
+
+          },
+          (err) => {
+            console.log(err);
+
+          })
+      });
+
+      reader.readAsDataURL(file);
+
+  }
+
+  viewFileImg(file: any) { //Angular 11, for stricter type
+		if(!file[0] || file[0].length == 0) {
+			this.msg = 'You must select an image';
+			return;
+		}
+
+		var mimeType = file[0].type;
+
+		if (mimeType.match(/image\/*/) == null) {
+			this.msg = "Only images are supported";
+			return;
+		}
+
+		var reader = new FileReader();
+		reader.readAsDataURL(file[0]);
+
+		reader.onload = (_event) => {
+			this.msg = "";
+			this.urlImg = reader.result;
+		}
+	}
 
 }
