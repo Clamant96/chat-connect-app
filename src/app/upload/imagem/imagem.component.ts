@@ -53,8 +53,7 @@ export class ImagemComponent implements OnInit {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
 
-    if(file.type == 'image/png') {
-      this.viewFileImg(imageInput.files);
+    this.viewFileImg(imageInput.files);
 
       reader.addEventListener('load', (event: any) => {
 
@@ -84,10 +83,13 @@ export class ImagemComponent implements OnInit {
 
       reader.readAsDataURL(file);
 
+    /*if(file.type == 'image/png') {
+
+
     }else {
       this.onError();
 
-    }
+    }*/
 
   }
 

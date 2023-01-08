@@ -435,6 +435,12 @@ export class HomeComponent implements OnInit {
 
         this.usuarioService.findByIdUsuario(idUsuario).subscribe((resp: Usuario) => {
           this.conversaMemoria.usuario = resp;
+
+          console.log('Mensagens carregadas');
+
+        }, () => {
+          console.log('Ocorreu um erro ao carregar as mensagens');
+
         });
 
         this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
@@ -443,6 +449,12 @@ export class HomeComponent implements OnInit {
           });*/
 
           this.conversaMemoria.chat = resp;
+
+          console.log('Chat carregado');
+
+        }, () => {
+          console.log('Ocorreu um erro ao carregar o chat');
+
         });
 
         this.chat.conversas.push(this.conversaMemoria);
@@ -460,6 +472,12 @@ export class HomeComponent implements OnInit {
         });*/
 
         this.chat = resp;
+
+        console.log('Chat carregado');
+
+      }, () => {
+        console.log('Ocorreu um erro ao carregar o chat');
+
       });
 
       setTimeout(() => {
