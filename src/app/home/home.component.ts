@@ -341,6 +341,9 @@ export class HomeComponent implements OnInit {
       this.statusMensagem = "esquerda";
     }
 
+    /* DESCE O SCROLL DO CHAT ATE O FINAL DA TELA */
+    window.document.querySelector('#chat-conversa-id')?.scrollBy(800, 1300);
+
     return this.statusMensagem;
   }
 

@@ -472,6 +472,10 @@
 
 }
 
+.section .container-section .lista-categoria ul .cria-scrolling-chat::-webkit-scrollbar-button {
+  bottom: 0;
+}
+
 /* == TESTE == */
 
 .section .container-section .lista-categoria ul .cria-scrolling-chat .fundo-drop {
@@ -732,7 +736,7 @@
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
 
   font-size: 18px;
   font-weight: 400;
@@ -754,10 +758,11 @@
 
   background-color: var(--background-mesagem-usuario) !important;
 
-  width: 70%;
+  min-width: 30%;
+  max-width: 60%;
   height: auto;
 
-  margin-left: 20%;
+  margin-left: 40%;
 
   border-radius: 5px !important;
 
@@ -772,14 +777,38 @@
 
   background-color: var(--background-mesagem-resposta) !important;
 
-  width: 70%;
+  min-width: 30%;
+  max-width: 60%;
   height: auto;
 
+  margin-right: calc(100% - 45%);
   margin-left: 5%;
 
   border-radius: 5px !important;
 
   box-shadow: 0px 3px 5px -3px var(--text-black) !important;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .esquerda .mesagem .data-conversa {
+  margin-right: 1%;
+  margin-left: 10%;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .esquerda .mesagem .img {
+  padding: 0.4% 0.4% 0.4% 0.4%;
+
+  width: 24.5vw;
+  height: auto;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .esquerda .mesagem .img img {
+  width: 100%;
+  height: auto;
+
+  border-radius: 5px;
 
 }
 
@@ -807,7 +836,7 @@
   width: 70%;
   height: auto;
 
-  margin-left: -40%;
+  margin-right: 46%;
 
   border-radius: 5px !important;
 
@@ -819,12 +848,14 @@
   width: 100%;
   height: auto;
 
+  position: relative;
+
 }
 
 .section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem .img {
-  padding: 1% 1% 1% 0%;
+  padding: 0.4% 0.4% 0.4% 0.4%;
 
-  width: 100%;
+  width: 24.5vw;
   height: auto;
 
 }
@@ -852,22 +883,31 @@
 .section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem .conteudo-conversa {
   cursor: pointer;
 
-  width: 90%;
+  width: 100%;
   height: auto;
 
   color: var(--text-white) !important;
 
   font-size: 15px;
 
+  padding: 1% 1% 1% 1.5%;
+
 }
 
 .section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem .data-conversa {
-  width: 98%;
+  margin-right: 0.4%;
+
+  width: 100%;
   height: auto;
 
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  position: absolute;
+
+  bottom: 0;
+  right: 0;
 
 }
 
@@ -878,10 +918,26 @@
 
 }
 
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem .data-conversa .data-conversa-icone {
+  width: 20px;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem .data-conversa .data-conversa-icone svg {
+  width: 100%;
+  height: auto;
+
+  color: var(--text-white-hora) !important;
+
+}
+
 /* FIGURINHA */
 .section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem-figurinha {
-  margin-left: 50%;
-
   width: 50%;
   height: auto;
 
@@ -889,6 +945,20 @@
   align-items: flex-end;
   flex-direction: column;
   justify-content: center;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .esquerda-figurinha .mesagem-figurinha {
+  width: 70%;
+
+  padding: 0% 2% 0% 2%;
+
+  border-radius: 50px;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .direita-figurinha .mesagem-figurinha {
+  margin-right: -50%;
 
 }
 
@@ -909,9 +979,38 @@
 
   background-color: var(--background-mesagem-usuario);
 
-  padding: 0% 2%;
+  padding: 0% 0% 0% 2%;
+
+  border-radius: 50px 0px 0px 50px;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .esquerda-figurinha .mesagem-figurinha .data-conversa .data-conversa-p {
+  padding: 0% 2% 0% 2%;
 
   border-radius: 50px;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem-figurinha .data-conversa .data-conversa-icone {
+  width: 18px;
+  height: auto;
+
+  background-color: var(--background-mesagem-usuario);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 0px 50px 50px 0px;
+
+}
+
+.section .container-section .lista-categoria ul .cria-scrolling-chat a .mesagem-figurinha .data-conversa .data-conversa-icone svg {
+  width: 100%;
+  height: auto;
+
+  color: var(--text-white-hora) !important;
 
 }
 
