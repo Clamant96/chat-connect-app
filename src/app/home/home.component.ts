@@ -106,6 +106,194 @@ export class HomeComponent implements OnInit {
 
   conteudoConversa: string = "";
 
+  /* SELECAO DE EMOJI */
+  public icones: string[] = [
+    "😀",
+    "😁",
+    "😂",
+    "😃",
+    "😄",
+    "😅",
+    "😆",
+    "😇",
+    "😈",
+    "😉",
+    "😊",
+    "😋",
+    "😌",
+    "😍",
+    "😎",
+    "😏",
+    "😐",
+    "😑",
+    "😒",
+    "😓",
+    "😔",
+    "😕",
+    "😖",
+    "😗",
+    "😘",
+    "😙",
+    "😚",
+    "😛",
+    "😜",
+    "😝",
+    "😞",
+    "😟",
+    "😠",
+    "😡",
+    "😢",
+    "😣",
+    "😤",
+    "😥",
+    "😦",
+    "😧",
+    "😨",
+    "😩",
+    "😪",
+    "😫",
+    "😬",
+    "😭",
+    "😮",
+    "😯",
+    "😰",
+    "😱",
+    "😲",
+    "😳",
+    "😴",
+    "😵",
+    "😶",
+    "😷",
+    "🙁",
+    "🙂",
+    "🙃",
+    "🙄",
+    "🤐",
+    "🤑",
+    "🤒",
+    "🤓",
+    "🤔",
+    "🤕",
+    "🤠",
+    "🤡",
+    "🤢",
+    "🤣",
+    "🤤",
+    "🤥",
+    "🤧",
+    "🤨",
+    "🤩",
+    "🤪",
+    "🤫",
+    "🤬",
+    "🤭",
+    "🤮",
+    "🤯",
+    "🧐",
+    "☝",
+    "⛹",
+    "✊",
+    "✋",
+    "✌",
+    "✍",
+    "🎅",
+    "🏂",
+    "🏃",
+    "🏄",
+    "🏇",
+    "🏊",
+    "🏋",
+    "🏌",
+    "👂",
+    "👃",
+    "👆",
+    "👇",
+    "👈",
+    "👉",
+    "👊",
+    "👋",
+    "👌",
+    "👍",
+    "👎",
+    "👏",
+    "👐",
+    "👦",
+    "👧",
+    "👨",
+    "👩",
+    "👮",
+    "👰",
+    "👱",
+    "👲",
+    "👳",
+    "👴",
+    "👵",
+    "👶",
+    "👷",
+    "👸",
+    "👼",
+    "💁",
+    "💂",
+    "💃",
+    "💅",
+    "💆",
+    "💇",
+    "💪",
+    "🕴",
+    "🕵",
+    "🕺",
+    "🖐",
+    "🖕",
+    "🖖",
+    "🙅",
+    "🙆",
+    "🙇",
+    "🙋",
+    "🙌",
+    "🙍",
+    "🙎",
+    "🙏",
+    "🚣",
+    "🚴",
+    "🚵",
+    "🚶",
+    "🛀",
+    "🛌",
+    "🤘",
+    "🤙",
+    "🤚",
+    "🤛",
+    "🤜",
+    "🤝",
+    "🤞",
+    "🤟",
+    "🤦",
+    "🤰",
+    "🤱",
+    "🤲",
+    "🤳",
+    "🤴",
+    "🤵",
+    "🤶",
+    "🤷",
+    "🤸",
+    "🤹",
+    "🤽",
+    "🤾",
+    "🧑",
+    "🧒",
+    "🧓",
+    "🧔",
+    "🧕",
+    "🧖",
+    "🧗",
+    "🧘",
+    "🧙",
+    "🧚",
+    "🧜",
+    "🧝"
+  ];
+
   /* WebSocket - CONFIGURACAO */
   items: any[] = [];
   private webSocketConnector: WebSocketConnector;
@@ -189,6 +377,18 @@ export class HomeComponent implements OnInit {
   /*onMessage() {
     this.items.push(this.conversa.conteudo);
   }*/
+
+  selecionaIcone(icone: string) {
+
+    if(this.conversa.conteudo == undefined) {
+      this.conversa.conteudo = icone;
+
+    }else {
+      this.conversa.conteudo = this.conversa.conteudo + icone;
+
+    }
+
+  }
 
   findAllChatsbyIdUsuario(id: number) {
 
@@ -487,6 +687,11 @@ export class HomeComponent implements OnInit {
         this.start();
 
       }, 1);
+
+      if(this.habilitaModalEmojiEfigurinha) {
+        this.expandirFigurinhas(); // FECHA A TELA EXPANDIDA CASO ESTEJA ABERTA
+
+      }
 
     }catch(erro) {
       console.log(erro);
@@ -921,6 +1126,8 @@ export class HomeComponent implements OnInit {
     }else {
       this.abreCampoParaVisualizarFigurinhas = "expande-figurinhas";
       this.habilitaModalEmojiEfigurinha = true;
+
+      this.gerenciaModalAberto('imoji');
 
     }
 

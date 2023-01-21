@@ -12,5 +12,6 @@ export const environment = {
 	chats: [],
   token: "",
   imgGrupo: "../../assets/img/perfil.svg",
-  nomeUplaodImagem: ""
+  nomeUplaodImagem: "",
+  selecao: ""
 };

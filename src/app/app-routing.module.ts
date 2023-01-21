@@ -10,6 +10,7 @@ const routes: Routes = [
   /* ACESSO VAZIO */
   {
     path: '',
+    //redirectTo: 'login',
     redirectTo: 'login',
     pathMatch: 'full'
   },
