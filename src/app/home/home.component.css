@@ -824,6 +824,11 @@
 
 }
 
+.section .container-section .lista-categoria ul .cria-scrolling-chat #direita .direita .icone-perfil-mensagem {
+  display: none;
+
+}
+
 .section .container-section .lista-categoria ul .cria-scrolling-chat a .esquerda .mesagem .data-conversa {
   margin-right: 1%;
   margin-left: 10%;
@@ -1087,10 +1092,12 @@
 /*==========*/
 
 .section .container-section .lista-categoria ul .cria-scrolling-chat a .icone, .section .container-section .lista-categoria ul .cria-scrolling-chat a .icone-perfil-mensagem {
-  margin-right: 2%;
-  margin-left: 2%;
+  margin-right: 0%;
+  margin-left: 0%;
 
-  width: 10%;
+  padding: 2%;
+
+  width: 13%;
   height: auto;
 
   cursor: pointer;
@@ -1102,9 +1109,7 @@
 }
 
 .section .container-section .lista-categoria ul .cria-scrolling-chat a .icone img, .section .container-section .lista-categoria ul .cria-scrolling-chat a .icone-perfil-mensagem img {
-  padding: 5%;
-
-  width: 90%;
+  width: 100%;
   height: auto;
 
   border-radius: 50%;

@@ -140,9 +140,6 @@
 
             <a *ngFor='let item of chat.conversas' id="{{ajustaMensagem(item.usuario.id, id)}}">
               <div *ngIf="item.conteudo != 'img'" class="{{ajustaMensagem(item.usuario.id, id)}}">
-                <div *ngIf="this.chat.tipo != 'chat'" class="icone-perfil-mensagem">
-                  <img src="{{item.usuario.img}}" alt="{{item.usuario.username}}">
-                </div>
                 <div class="mesagem" >
                   <p *ngIf="apresentaNome" class="nome-usuario">
                     {{item.usuario.username}}
@@ -168,6 +165,9 @@
                       </svg>
                     </div>
                   </div>
+                </div>
+                <div *ngIf="this.chat.tipo != 'chat'" class="icone-perfil-mensagem">
+                  <img src="{{item.usuario.img}}" alt="{{item.usuario.username}}">
                 </div>
               </div>
               <!-- CONVERSA COM FIGURINHA -->
