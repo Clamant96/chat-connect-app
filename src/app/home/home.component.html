@@ -217,7 +217,7 @@
               <!-- PAINEL ICONE -->
               <div *ngIf="this.renderizaItem == 'imoji'" class="espaco-de-itens">
                 <div class="bloco">
-                  <div class="icone" *ngFor="let icone of this.icones" (click)="selecionaIcone(icone)" >
+                  <div class="icone" *ngFor="let icone of this.icones.listaIcones" (click)="selecionaIcone(icone)" >
                     {{icone}}
                   </div>
                 </div>
