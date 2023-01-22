@@ -24,6 +24,9 @@ export class DropComponent implements OnInit {
   @Input() idUsuario = 0;
   @Input() idChat = 0;
 
+  public isImagem: boolean = false;
+  public isVideo: boolean = false;
+
   selectedFile: ImageSnippet;
 
   usuarioConversa: Usuario = new Usuario();
@@ -186,7 +189,7 @@ export class DropComponent implements OnInit {
 
 		var mimeType = file[0].type;
 
-		if (mimeType.match(/image\/*/) == null) {
+		if (mimeType.match(/image\/*/) == null || mimeType.match(/video\/*/) == null) {
 			this.msg = "Only images are supported";
 			return;
 		}

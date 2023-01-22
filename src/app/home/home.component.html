@@ -115,8 +115,12 @@
                 </svg>
               </div>
 
-              <div class="img">
-                <img src="{{this.urlImg}}" alt="Img upload">
+              <div *ngIf="this.renderizaImagemUpload()" class="img">
+                <img [src]="this.imgRenderizada" alt="Img upload" />
+              </div>
+
+              <div *ngIf="this.renderizaVideoUpload()" class="img">
+                <video [src]="this.imgRenderizada" controls></video>
               </div>
 
               <div class="conteudo-img">
@@ -125,7 +129,8 @@
                 <hr>
 
                 <div class="envio-e-view-img-envio">
-                  <div class="img" style="background-image: url({{imgRenderizada}});"></div>
+                  <div *ngIf="this.renderizaImagemUpload()" class="img" style="background-image: url({{imgRenderizada}});"></div>
+                  <video *ngIf="this.renderizaVideoUpload()" class="img" [src]="this.imgRenderizada"></video>
 
                   <button type="submit" (click)="adicionarItemListaPortagemComImg(id, memoriaIdChat)" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
@@ -139,13 +144,16 @@
             <!-- FIM TESTE -->
 
             <a *ngFor='let item of chat.conversas' id="{{ajustaMensagem(item.usuario.id, id)}}">
-              <div *ngIf="item.conteudo != 'img'" class="{{ajustaMensagem(item.usuario.id, id)}}">
+              <div *ngIf="item.conteudo != 'img' && this.isChatAtivo" class="{{ajustaMensagem(item.usuario.id, id)}}">
                 <div class="mesagem" >
                   <p *ngIf="apresentaNome" class="nome-usuario">
                     {{item.usuario.username}}
                   </p>
-                  <div *ngIf="item.conteudoImg != null" class="img">
-                    <img src="{{carregaImagem(username, item.conteudoImg)}}" alt="{{item.img}}" />
+                  <div *ngIf="item.conteudoImg != null && this.renderizaImagem(item.conteudoImg)" class="img">
+                    <img [src]="carregaImagem(username, item.conteudoImg)" alt="{{item.img}}" />
+                  </div>
+                  <div *ngIf="item.conteudoImg != null && this.renderizaVideo(item.conteudoImg)" class="img">
+                    <video [src]="carregaImagem(username, item.conteudoImg)" controls></video>
                   </div>
                   <p class="conteudo-conversa">
                     {{item.conteudo}}

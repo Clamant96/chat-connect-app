@@ -107,6 +107,11 @@ export class HomeComponent implements OnInit {
 
   conteudoConversa: string = "";
 
+  /* RENDERIZA IMG OU VIDEO */
+  public isImagem: boolean = false;
+  public isVideo: boolean = false;
+  public isChatAtivo: boolean = true;
+
   /* SELECAO DE EMOJI */
   public icones: Emoji = new Emoji();
 
@@ -984,8 +989,16 @@ export class HomeComponent implements OnInit {
       return img;
     }
 
+    let validacao: string = `${this.url}/image/carregar/${img}`;
+
+    if(validacao.includes('mp4')) {
+
+      return validacao;
+    }
+
     // return `${this.url}/image/carregar/${username}/${img}`;
-    return `${this.url}/image/carregar/${img}`;
+    // return `${this.url}/image/carregar/${img}`;
+    return validacao;
   }
 
   dropHandler(ev: any) {
@@ -1035,9 +1048,15 @@ export class HomeComponent implements OnInit {
       window.document.querySelector('.drop_zone')?.setAttribute('style', 'opacity: 1; width: 100%;');
       window.document.querySelector('.fundo-drop')?.setAttribute('style', 'display: block;');
 
+      this.isChatAtivo = false;
+
     }else {
       window.document.querySelector('.drop_zone')?.setAttribute('style', 'opacity: 0; width: 50%;');
       window.document.querySelector('.fundo-drop')?.setAttribute('style', 'display: none;');
+
+      this.isChatAtivo = true;
+
+      this.conversa = new Conversa();
 
     }
 
@@ -1048,9 +1067,15 @@ export class HomeComponent implements OnInit {
       window.document.querySelector('.renderiza')?.setAttribute('style', 'display: block;');
       window.document.querySelector('.fundo-drop')?.setAttribute('style', 'display: block;');
 
+      this.isChatAtivo = false;
+
     }else {
       window.document.querySelector('.renderiza')?.setAttribute('style', 'display: none;');
       window.document.querySelector('.fundo-drop')?.setAttribute('style', 'display: none;');
+
+      this.isChatAtivo = true;
+
+      this.conversa = new Conversa();
 
     }
 
@@ -1133,7 +1158,7 @@ export class HomeComponent implements OnInit {
 
 		var mimeType = file[0].type;
 
-		if (mimeType.match(/image\/*/) == null) {
+		if (mimeType.match(/image\/*/) == null || mimeType.match(/video\/*/) == null) {
 			this.msg = "Only images are supported";
 			return;
 		}
@@ -1145,6 +1170,59 @@ export class HomeComponent implements OnInit {
 			this.msg = "";
 			this.urlImg = reader.result;
 		}
+
 	}
+
+  renderizaVideo(nomeArquivo: string) {
+
+    let retorno: boolean = false;
+
+    if(nomeArquivo.includes('mp4')) {
+      retorno = true;
+
+    }
+
+    return retorno;
+  }
+
+  renderizaImagem(nomeArquivo: string) {
+
+    let retorno: boolean = false;
+
+    if(nomeArquivo.includes('jpeg') || nomeArquivo.includes('jpg') || nomeArquivo.includes('png') || nomeArquivo.includes('svg')){
+      retorno = true;
+
+    }
+
+    return retorno;
+  }
+
+  renderizaVideoUpload() {
+
+    let retorno: boolean = false;
+
+    console.log(this.imgRenderizada);
+
+    if(this.imgRenderizada.includes('mp4')) {
+      retorno = true;
+
+    }
+
+    return retorno;
+  }
+
+  renderizaImagemUpload() {
+
+    let retorno: boolean = false;
+
+    console.log(this.imgRenderizada);
+
+    if(this.imgRenderizada.includes('jpeg') || this.imgRenderizada.includes('jpg') || this.imgRenderizada.includes('png') || this.imgRenderizada.includes('svg')){
+      retorno = true;
+
+    }
+
+    return retorno;
+  }
 
 }

@@ -13,8 +13,12 @@
     </svg>
   </div>
 
-  <div class="img">
+  <div *ngIf="this.isImagem" class="img">
     <img src="{{this.url}}" alt="Img upload">
+  </div>
+
+  <div *ngIf="this.isVideo" class="img">
+    <video [src]="this.url" controls></video>
   </div>
 
   <div class="conteudo-img">
@@ -23,7 +27,8 @@
     <hr>
 
     <div class="envio-e-view-img-envio">
-      <div class="img" style="background-image: url({{imgRenderizada}});"></div>
+      <div *ngIf="this.isImagem" class="img" style="background-image: url({{imgRenderizada}});"></div>
+      <video *ngIf="this.isVideo" class="img" [src]="imgRenderizada" controls></video>
 
       <button type="submit" (click)="adicionarItemLista(idUsuario, idChat)" >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
