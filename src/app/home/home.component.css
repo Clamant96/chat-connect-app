@@ -500,7 +500,7 @@
 
   background-color: var(--background-add-grupo);
 
-  z-index: 1 !important;
+  /*z-index: 1 !important;*/
 
 }
 
