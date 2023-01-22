@@ -1237,15 +1237,17 @@
 
   padding-bottom: 1.2%;
 
+  margin-left: 2%;
+
   width: 15%;
   height: auto;
 
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
 
   outline: none;
 
-  background-color: var(--text-green-titulo);
+  background-color: var(--background-mesagem-usuario);
 
   font-weight: 500;
 
@@ -1261,8 +1263,6 @@
   width: 5%;
   height: auto;
 
-  padding-bottom: 0.6%;
-
   margin-left: 2.5%;
 
   display: flex;
@@ -1274,12 +1274,16 @@
 }
 
 .section .container-section .lista-categoria ul .novo-item-lista .img svg {
-  padding: 5%;
+  padding: 10%;
 
-  width: 90%;
+  width: 80%;
   height: auto;
 
   cursor: pointer;
+
+  background-color: var(--background-mesagem-usuario);
+
+  border-radius: 50px;
 
 }
 
