@@ -167,7 +167,7 @@ export class HomeComponent implements OnInit {
 
   start() {
     this.websocketService.inicializaObservador().subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
     });
 
   }
@@ -183,12 +183,12 @@ export class HomeComponent implements OnInit {
         });*/
 
         this.chat = resp;
-        console.log('RECEBENDO INPUT PARA ATUALIZAR CHAT');
-        console.log(resp);
+        // console.log('RECEBENDO INPUT PARA ATUALIZAR CHAT');
+        // console.log(resp);
       });
 
     }else {
-      console.log("RECARREGA LISTA DE CHATS");
+      // console.log("RECARREGA LISTA DE CHATS");
       this.findAllChatsbyIdUsuario(this.id);
 
     }
@@ -216,8 +216,8 @@ export class HomeComponent implements OnInit {
     this.chatService.findAllChatsByIdUsuario(id).subscribe((resp: Chat[]) => {
       this.chatArray = resp;
 
-      console.log('CHAT ARRAY: ');
-      console.log(this.chatArray);
+      // console.log('CHAT ARRAY: ');
+      // console.log(this.chatArray);
 
       this.chatArray.map(item => {
 
@@ -285,7 +285,7 @@ export class HomeComponent implements OnInit {
       // this.imgConversaUsuario = resp.img;
 
       if(resp.tipo == "chat") {
-        console.log("E CHAT");
+        // console.log("E CHAT");
 
         resp.usuarios.map(i => {
 
@@ -299,18 +299,14 @@ export class HomeComponent implements OnInit {
 
         });
 
-        console.log("this.imgConversaUsuario: "+ this.imgConversaUsuario);
-
       }else {
-        console.log("NAO E CHAT");
+        // console.log("NAO E CHAT");
         this.imgConversaUsuario = "https://i0.wp.com/emotioncard.com.br/wp-content/uploads/2016/05/perfil-whatsapp.jpg?fit=600%2C600&ssl=1";
 
       }
 
-      console.log("CHAT DO FINDBYIDCHAT");
-      console.log(this.chat);
-
-      console.log("this.imgConversaUsuario: "+ this.imgConversaUsuario);
+      // console.log("CHAT DO FINDBYIDCHAT");
+      // console.log(this.chat);
 
     });
 
@@ -350,8 +346,8 @@ export class HomeComponent implements OnInit {
 
     });
 
-    console.log("ARRAY (FIGURINHAS)");
-    console.log(this.listaFigurinhasDoUsuario);
+    // console.log("ARRAY (FIGURINHAS)");
+    // console.log(this.listaFigurinhasDoUsuario);
   }
 
   ajustaMensagem(idUsuarioConversa: number, idUsuario: number) {
@@ -404,7 +400,7 @@ export class HomeComponent implements OnInit {
 
     if(chat.tipo == "chat") {
       this.nomeChat = this.ajustaNomeChat(chat);
-      console.log();
+      // console.log();
       this.apresentaNome = this.apresentaNomeUsuario(chat.tipo);
 
       //this.ultimaMensagem = chat.conversas[chat.conversas.length - 1].conteudo;
@@ -449,46 +445,51 @@ export class HomeComponent implements OnInit {
       // this.conversa.conteudo = btoa(this.conversa.conteudo);
       /* ------------------------- */
 
-      console.log(this.conversa);
+      // console.log(this.conversa);
 
       this.conversaMemoria.conteudo = this.conversa.conteudo;
       this.conversaMemoria.data = new Date();
 
-      this.conversaService.postConversa(this.conversa).subscribe((resp: Conversa) => {
-        console.log('Conversa enviada com sucesso.');
+      try {
+        this.conversaService.postConversa(this.conversa).subscribe((resp: Conversa) => {
+          // console.log('Conversa enviada com sucesso.');
 
-        this.usuarioService.findByIdUsuario(idUsuario).subscribe((resp: Usuario) => {
-          this.conversaMemoria.usuario = resp;
+          this.usuarioService.findByIdUsuario(idUsuario).subscribe((resp: Usuario) => {
+            this.conversaMemoria.usuario = resp;
 
-          console.log('Mensagens carregadas');
+            // console.log('Mensagens carregadas');
 
-        }, () => {
-          console.log('Ocorreu um erro ao carregar as mensagens');
+          }, () => {
+            // console.log('Ocorreu um erro ao carregar as mensagens');
+
+          });
+
+          this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
+            /*resp.conversas.map(item => {
+              item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
+            });*/
+
+            this.conversaMemoria.chat = resp;
+
+            // console.log('Chat carregado');
+
+          }, () => {
+            // console.log('Ocorreu um erro ao carregar o chat');
+
+          });
+
+          this.chat.conversas.push(this.conversaMemoria);
+
+          this.conversa = new Conversa();
+
+        }, e => {
+          // console.log('Ocorreu um erro no envio da conversa.');
 
         });
 
-        this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
-          /*resp.conversas.map(item => {
-            item.conteudo = atob(item.conteudo); // DESCRIPTOGRAFA DADOS
-          });*/
+      }catch(err) {
 
-          this.conversaMemoria.chat = resp;
-
-          console.log('Chat carregado');
-
-        }, () => {
-          console.log('Ocorreu um erro ao carregar o chat');
-
-        });
-
-        this.chat.conversas.push(this.conversaMemoria);
-
-        this.conversa = new Conversa();
-
-      }, e => {
-        console.log('Ocorreu um erro no envio da conversa.');
-
-      });
+      }
 
       this.chatService.findByIdChat(idChat).subscribe((resp: Chat) => {
         /*resp.conversas.map(item => {
@@ -497,10 +498,10 @@ export class HomeComponent implements OnInit {
 
         this.chat = resp;
 
-        console.log('Chat carregado');
+        // console.log('Chat carregado');
 
       }, () => {
-        console.log('Ocorreu um erro ao carregar o chat');
+        // console.log('Ocorreu um erro ao carregar o chat');
 
       });
 
@@ -515,7 +516,7 @@ export class HomeComponent implements OnInit {
       }
 
     }catch(erro) {
-      console.log(erro);
+      // console.log(erro);
     }
 
   }
@@ -538,13 +539,13 @@ export class HomeComponent implements OnInit {
       // this.conversa.conteudo = btoa(this.conversa.conteudo);
       /* ------------------------- */
 
-      console.log(this.conversa);
+      // console.log(this.conversa);
 
       this.conversaMemoria.conteudo = this.conversa.conteudo;
       this.conversaMemoria.data = new Date();
 
       this.conversaService.postConversa(this.conversa).subscribe((resp: Conversa) => {
-        console.log('Conversa enviada com sucesso.');
+        // console.log('Conversa enviada com sucesso.');
 
         this.usuarioService.findByIdUsuario(idUsuario).subscribe((resp: Usuario) => {
           this.conversaMemoria.usuario = resp;
@@ -563,7 +564,7 @@ export class HomeComponent implements OnInit {
         this.conversa = new Conversa();
 
       }, e => {
-        console.log('Ocorreu um erro no envio da conversa.');
+        // console.log('Ocorreu um erro no envio da conversa.');
 
       });
 
@@ -583,7 +584,7 @@ export class HomeComponent implements OnInit {
       this.expandirFigurinhas();
 
     }catch(erro) {
-      console.log(erro);
+      // console.log(erro);
     }
 
   }
@@ -596,7 +597,7 @@ export class HomeComponent implements OnInit {
 
   apresentaUsuarios(nomeChat: string) {
 
-    console.log("ABRIR NOVO CHAT");
+    // console.log("ABRIR NOVO CHAT");
 
     this.voltarUsuarios(); // AJUSTA TELAS PARA OTIMIZACAO DE CSS
 
@@ -671,7 +672,7 @@ export class HomeComponent implements OnInit {
       return object.id === usuario.id;
     });
 
-    console.log(indexOfObject); // -> 1
+    // console.log(indexOfObject); // -> 1
 
     if (indexOfObject !== -1) {
       this.listaUsuariosGrupo.splice(indexOfObject, 1);
@@ -681,19 +682,19 @@ export class HomeComponent implements OnInit {
 
     }
 
-    console.log(this.listaUsuariosGrupo);
+    // console.log(this.listaUsuariosGrupo);
 
   }
 
   addUsuariosAoGrupo() {
 
     /*this.usuarioService.chatOuGrupo(this.id, usuario.id).subscribe((resp: Usuario) => {
-      console.log("Chat criado com sucesso.");
+      // console.log("Chat criado com sucesso.");
 
       this.findAllChatsbyIdUsuario(this.id);
 
     }, erro => {
-      console.log("Ocorreu um problema com a criacao do chat.");
+      // console.log("Ocorreu um problema com a criacao do chat.");
 
     });*/
 
@@ -714,8 +715,8 @@ export class HomeComponent implements OnInit {
 
     // CRIAR O GRUPO
     this.chatService.postChat(this.novoChat).subscribe((resp: Chat) => {
-      console.log("resp chat:");
-      console.log(resp);
+      // console.log("resp chat:");
+      // console.log(resp);
 
       // ADICIONA O PRIMEIRO USUARIO <CRIADOS DO GRUPO>
       this.usuarioService.chatOuGrupo(this.id, resp.id).subscribe((resp: Usuario) => {
@@ -727,10 +728,10 @@ export class HomeComponent implements OnInit {
 
         // ADICIONA OS USUARIOS CARREGADOS NA LISTA <DEMAIS USUARIOS>
         this.usuarioService.chatOuGrupo(item.id, resp.id).subscribe((resp: Usuario) => {
-          console.log("Usuarios inserido no grupo com sucesso");
+          // console.log("Usuarios inserido no grupo com sucesso");
 
         }, erro => {
-          console.log("Ocorreu um erro ao tentar adicionar o usuario ao grupo");
+          // console.log("Ocorreu um erro ao tentar adicionar o usuario ao grupo");
 
         });
 
@@ -774,8 +775,8 @@ export class HomeComponent implements OnInit {
 
     });
 
-    console.log("Chat depois: ");
-    console.log(this.novoChat);
+    // console.log("Chat depois: ");
+    // console.log(this.novoChat);
 
     setTimeout(() => {
       this.start();
@@ -810,12 +811,12 @@ export class HomeComponent implements OnInit {
     if(!jaExisteEmMinhaLista) { // NAO EXISTE
       // criar o chat
       this.chatService.postChat(this.novoChat).subscribe((resp: Chat) => {
-        console.log("resp chat:");
-        console.log(resp);
+        // console.log("resp chat:");
+        // console.log(resp);
 
         gravaChatReload = resp;
 
-        console.log(gravaChatReload);
+        // console.log(gravaChatReload);
 
         // ADICIONA O PRIMEIRO USUARIO
         this.usuarioService.chatOuGrupo(this.id, resp.id).subscribe((resp: Usuario) => {
@@ -847,8 +848,8 @@ export class HomeComponent implements OnInit {
 
       });
 
-      console.log("Chat depois: ");
-      console.log(this.novoChat);
+      // console.log("Chat depois: ");
+      // console.log(this.novoChat);
 
     }else { // JA EXISTE
       this.findByIdChat(gravaChatReload);
@@ -869,7 +870,7 @@ export class HomeComponent implements OnInit {
       this.findAllChatsbyIdUsuario(this.id);
 
     }, erro => {
-      console.log("Ocorreu um problema com a criacao do chat.");
+      // console.log("Ocorreu um problema com a criacao do chat.");
 
     });*/
 
@@ -1002,7 +1003,7 @@ export class HomeComponent implements OnInit {
   }
 
   dropHandler(ev: any) {
-    console.log('File(s) dropped');
+    // console.log('File(s) dropped');
 
     this.gerenciaOpacidadeTelaDrop(false);
     this.rederizaImagemDrop(true);
@@ -1017,8 +1018,8 @@ export class HomeComponent implements OnInit {
         if (ev.dataTransfer.items[i].kind === 'file') {
           // var file = ev.dataTransfer.items[i].getAsFile();
           this.file = ev.dataTransfer.items[i].getAsFile();
-          // console.log('... file[' + i + '].name = ' + file.name);
-          console.log('... file[' + i + '].name = ' + this.file.name);
+          // // console.log('... file[' + i + '].name = ' + file.name);
+          // console.log('... file[' + i + '].name = ' + this.file.name);
 
           this.processFile(ev.dataTransfer); // PROCESSA A IMAGEM NO SERVIDOR
 
@@ -1027,13 +1028,13 @@ export class HomeComponent implements OnInit {
     } else {
       // Use a interface DataTransfer para acessar o (s) arquivo (s)
       for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-        console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+        // console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
       }
     }
   }
 
   dragOverHandler(ev: any) {
-    console.log('File(s) in drop zone');
+    // console.log('File(s) in drop zone');
 
     this.gerenciaOpacidadeTelaDrop(true);
 
@@ -1092,11 +1093,11 @@ export class HomeComponent implements OnInit {
       this.conversa.chat = this.chatConversa;
       this.conversa.conteudo = this.conteudoConversa;
 
-      console.log("CONVERSA ENVIADA: ");
-      console.log(this.conversa);
+      // console.log("CONVERSA ENVIADA: ");
+      // console.log(this.conversa);
 
       this.conversaService.postConversa(this.conversa).subscribe((resp: Conversa) => {
-        console.log('Conversa enviada com sucesso.');
+        // console.log('Conversa enviada com sucesso.');
 
         this.rederizaImagemDrop(false);
 
@@ -1108,12 +1109,12 @@ export class HomeComponent implements OnInit {
         this.conversa = new Conversa();
 
       }, erro => {
-        console.log('Ocorreu um erro no envio da conversa.');
+        // console.log('Ocorreu um erro no envio da conversa.');
 
       });
 
     }catch(erro) {
-      console.log(erro);
+      // console.log(erro);
     }
 
   }
@@ -1132,7 +1133,7 @@ export class HomeComponent implements OnInit {
 
         this.imageService.uploadImage(this.selectedFile.file).subscribe(
           (res) => {
-            console.log(res);
+            // console.log(res);
 
             this.conversa.img = `${environment.username}/${environment.nomeUplaodImagem}`;
             this.conversa.conteudoImg = `${environment.username}/${environment.nomeUplaodImagem}`;
@@ -1141,7 +1142,7 @@ export class HomeComponent implements OnInit {
 
           },
           (err) => {
-            console.log(err);
+            // console.log(err);
 
           })
       });
@@ -1201,7 +1202,7 @@ export class HomeComponent implements OnInit {
 
     let retorno: boolean = false;
 
-    console.log(this.imgRenderizada);
+    // console.log(this.imgRenderizada);
 
     if(this.imgRenderizada.includes('mp4')) {
       retorno = true;
@@ -1215,7 +1216,7 @@ export class HomeComponent implements OnInit {
 
     let retorno: boolean = false;
 
-    console.log(this.imgRenderizada);
+    // console.log(this.imgRenderizada);
 
     if(this.imgRenderizada.includes('jpeg') || this.imgRenderizada.includes('jpg') || this.imgRenderizada.includes('png') || this.imgRenderizada.includes('svg')){
       retorno = true;

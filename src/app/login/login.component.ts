@@ -34,12 +34,11 @@ export class LoginComponent implements OnInit {
       environment.token = this.usuarioLogin.token;
       environment.img = this.usuarioLogin.img;
 
-      console.log(environment.id);
-      console.log(environment.username);
-      console.log(environment.password);
-      console.log(environment.token);
-      console.log(environment.img);
-
+      // console.log(environment.id);
+      // console.log(environment.username);
+      // console.log(environment.password);
+      // console.log(environment.token);
+      // console.log(environment.img);
 
       /* ARMAZENA O TOKEN DO USUARIO NO LOCAL STORAGE */
       localStorage.setItem('token', environment.token);
